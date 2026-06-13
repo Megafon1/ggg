@@ -18,7 +18,7 @@
         }
 
         body {
-            /* Бесшовный гемблинг-фон с помощью CSS-графики: сетка, неоновые отсветы и градиент */
+            /* Бесшовный гемблинг-фон: сетка, неоновые отсветы и темный градиент */
             background-color: #0b0c10;
             background-image: 
                 radial-gradient(circle at 80% 20%, rgba(255, 183, 3, 0.05) 0%, transparent 50%),
@@ -119,86 +119,146 @@
             padding-right: 40px;
         }
 
-        /* Стилизация правой части: бесшовный атмосферный элемент казино */
         .hero-cell-image {
             display: table-cell;
             width: 45%;
             vertical-align: middle;
         }
 
+        /* Обновленный 3D-контейнер для параллакса (Вариант 6) */
         .hero-theme-bg {
             width: 100%;
-            height: 340px;
+            height: 360px;
             border-radius: 24px;
-            background: linear-gradient(135deg, rgba(31, 25, 7, 0.6) 0%, rgba(16, 18, 22, 0.9) 100%);
-            border: 1px solid rgba(255, 183, 3, 0.25);
+            background: radial-gradient(circle at 50% 50%, rgba(255, 183, 3, 0.12) 0%, rgba(11, 12, 16, 0.8) 100%);
+            border: 1px solid rgba(255, 183, 3, 0.2);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 0 30px rgba(255, 183, 3, 0.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(5px);
+            perspective: 1000px;
         }
 
-        /* Геометрический узор казино (ромбы/сукно) внутри карточки */
-        .hero-theme-bg::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                linear-gradient(30deg, rgba(255, 183, 3, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(255, 183, 3, 0.03) 87.5%, rgba(255, 183, 3, 0.03)),
-                linear-gradient(150deg, rgba(255, 183, 3, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(255, 183, 3, 0.03) 87.5%, rgba(255, 183, 3, 0.03)),
-                linear-gradient(30deg, rgba(255, 183, 3, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(255, 183, 3, 0.03) 87.5%, rgba(255, 183, 3, 0.03)),
-                linear-gradient(150deg, rgba(255, 183, 3, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(255, 183, 3, 0.03) 87.5%, rgba(255, 183, 3, 0.03));
-            background-size: 60px 104px;
-            background-position: 0 0, 0 0, 30px 52px, 30px 52px;
-        }
-
-        /* Абстрактные светящиеся фишки и элементы азартных игр */
-        .gambling-elements {
+        /* Обертка для сцены параллакса */
+        .parallax-scene {
             position: absolute;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
-            z-index: 2;
+            transform-style: preserve-3d;
+            pointer-events: none;
         }
 
-        .neon-slot-circle {
+        /* Базовый класс для парящих объектов */
+        .parallax-layer {
             position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 220px; height: 220px;
-            border: 2px dashed rgba(255, 183, 3, 0.3);
-            border-radius: 50%;
-            box-shadow: 0 0 30px rgba(255, 183, 3, 0.1);
-        }
-
-        .center-crown {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 80px;
-            color: #ffb703;
-            text-shadow: 0 0 40px rgba(255, 183, 3, 0.6), 0 0 80px rgba(255, 183, 3, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
             user-select: none;
-            animation: float 4s ease-in-out infinite;
+            transition: transform 0.1s ease-out;
         }
 
-        @keyframes float {
-            0% { transform: translate(-50%, -50%) translateY(0px); }
-            50% { transform: translate(-50%, -50%) translateY(-10px); }
-            100% { transform: translate(-50%, -50%) translateY(0px); }
+        /* Слой 1: Размытый диск рулетки на заднем плане */
+        .layer-bg-roulette {
+            top: 15%;
+            left: 15%;
+            width: 240px;
+            height: 240px;
+            border: 4px dashed rgba(255, 183, 3, 0.15);
+            border-radius: 50%;
+            filter: blur(1px);
         }
-
-        .decor-item {
+        .layer-bg-roulette::before {
+            content: '';
             position: absolute;
-            font-size: 24px;
-            opacity: 0.25;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            width: 70%;
+            height: 70%;
+            border: 2px dashed rgba(255, 183, 3, 0.08);
+            border-radius: 50%;
         }
-        .di-1 { top: 40px; left: 50px; color: #ffb703; transform: rotate(-15deg); }
-        .di-2 { bottom: 50px; right: 60px; color: #ff007f; transform: rotate(20deg); }
-        .di-3 { top: 60px; right: 50px; color: #3498db; transform: rotate(10deg); }
-        .di-4 { bottom: 60px; left: 70px; color: #ffb703; transform: rotate(-25deg); }
+
+        /* Слой 2: Неоновые карты */
+        .layer-card-1 {
+            top: 90px;
+            left: 80px;
+            width: 110px;
+            height: 160px;
+            background: #14161d;
+            border: 2px solid rgba(255, 183, 3, 0.4);
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(255, 183, 3, 0.15);
+            transform: rotate(-15deg);
+            font-size: 20px;
+            padding: 10px;
+            color: #ffb703;
+        }
+
+        .layer-card-2 {
+            top: 70px;
+            right: 90px;
+            width: 110px;
+            height: 160px;
+            background: #14161d;
+            border: 2px solid rgba(255, 0, 127, 0.4);
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.15);
+            transform: rotate(12deg);
+            font-size: 20px;
+            padding: 10px;
+            color: #ff007f;
+        }
+
+        /* Слой 3: Объемные игральные кости с анимацией полета */
+        .layer-dice-1 {
+            top: 60px;
+            left: 45%;
+            font-size: 42px;
+            filter: drop-shadow(0 15px 10px rgba(0,0,0,0.5));
+            animation: floatDice1 4s ease-in-out infinite;
+        }
+
+        .layer-dice-2 {
+            bottom: 70px;
+            right: 25%;
+            font-size: 54px;
+            filter: drop-shadow(0 20px 15px rgba(0,0,0,0.6));
+            animation: floatDice2 4.5s ease-in-out infinite;
+        }
+
+        /* Слой 4: Золотые фишки на переднем плане */
+        .layer-chip-1 {
+            bottom: 40px;
+            left: 60px;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, #ffcd38 20%, #ffb703 60%, #b37d00 100%);
+            border: 3px dashed #fff;
+            border-radius: 50%;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5), inset 0 0 8px rgba(0,0,0,0.4);
+        }
+
+        .layer-chip-2 {
+            top: 50px;
+            right: 60px;
+            width: 35px;
+            height: 35px;
+            background: radial-gradient(circle, #ffcd38 20%, #ffb703 60%, #b37d00 100%);
+            border: 2px dashed rgba(255,255,255,0.8);
+            border-radius: 50%;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+        }
+
+        /* Анимации невесомости для костей */
+        @keyframes floatDice1 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(8deg); }
+        }
+        @keyframes floatDice2 {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(-10deg); }
+        }
 
         .hero h1 {
             font-size: 52px;
@@ -746,14 +806,24 @@
                 </div>
             </div>
             <div class="hero-cell-image">
-                <div class="hero-theme-bg">
-                    <div class="gambling-elements">
-                        <div class="neon-slot-circle"></div>
-                        <div class="center-crown">👑</div>
-                        <div class="decor-item di-1">🎰</div>
-                        <div class="decor-item di-2">💎</div>
-                        <div class="decor-item di-3">♠</div>
-                        <div class="decor-item di-4">🍒</div>
+                <div class="hero-theme-bg" id="parallaxContainer">
+                    <div class="parallax-scene">
+                        <div class="parallax-layer layer-bg-roulette" data-depth="10"></div>
+                        
+                        <div class="parallax-layer layer-card-1" data-depth="20">
+                            <div>♠</div>
+                            <div style="position:absolute; bottom:10px; right:10px; transform:rotate(180deg)">♠</div>
+                        </div>
+                        <div class="parallax-layer layer-card-2" data-depth="25">
+                            <div>♥</div>
+                            <div style="position:absolute; bottom:10px; right:10px; transform:rotate(180deg)">♥</div>
+                        </div>
+
+                        <div class="parallax-layer layer-dice-1" data-depth="40">🎲</div>
+                        <div class="parallax-layer layer-dice-2" data-depth="45">🎲</div>
+
+                        <div class="parallax-layer layer-chip-1" data-depth="60"></div>
+                        <div class="parallax-layer layer-chip-2" data-depth="55"></div>
                     </div>
                 </div>
             </div>
@@ -831,20 +901,10 @@
     </div>
 
     <script>
+        // База данных казино (можно дополнять)
         const projectsData = [
             {
                 id: "01",
-                name: "1win",
-                logoText: "1win",
-                logoColor: "#3498db",
-                streamers: "Dosaia, SilverName, Ludwig",
-                bonusText: "500% на депозит",
-                bonusExtra: "+ 250 FS",
-                link: "https://example.com/1win",
-                terms: "1. Бонус распределяется на первые 4 депозита.\n2. +200% на первый, +150% на второй, +100% на третий и +50% на четвертый.\n3. Отыгрыш происходит автоматически при проигрышных ставках."
-            },
-            {
-                id: "02",
                 name: "Gama Casino",
                 logoText: "GAMA",
                 logoColor: "#ff007f",
@@ -855,7 +915,7 @@
                 terms: "1. Бонус доступен только для новых игроков.\n2. Вейджер на бонус составляет х45.\n3. Минимальный депозит для активации — 1000 руб.\n4. Фриспины начисляются частями в течение 24 часов."
             },
             {
-                id: "03",
+                id: "02",
                 name: "R7 Casino",
                 logoText: "R7",
                 logoColor: "#f4d03f",
@@ -864,9 +924,21 @@
                 bonusExtra: "+ 100 FS",
                 link: "https://example.com/r7",
                 terms: "1. Максимальный размер бонуса — 50 000 руб.\n2. Вейджер на денежную часть х40, на фриспины х35.\n3. Требуется обязательная верификация аккаунта для вывода."
+            },
+            {
+                id: "03",
+                name: "1win",
+                logoText: "1win",
+                logoColor: "#3498db",
+                streamers: "Dosaia, SilverName, Ludwig",
+                bonusText: "500% на депозит",
+                bonusExtra: "+ 250 FS",
+                link: "https://example.com/1win",
+                terms: "1. Бонус распределяется на первые 4 депозита.\n2. +200% на первый, +150% на второй, +100% на третий и +50% на четвертый.\n3. Отыгрыш происходит автоматически при проигрышных ставках."
             }
         ];
 
+        // Функция динамического вывода проектов
         function renderProjects() {
             const listContainer = document.getElementById('projects-list');
             listContainer.innerHTML = '';
@@ -902,6 +974,7 @@
             });
         }
 
+        // Логика модальных окон условий
         const modalOverlay = document.getElementById('modalOverlay');
         const modalTitle = document.getElementById('modalTitle');
         const modalText = document.getElementById('modalText');
@@ -923,11 +996,13 @@
             if(e.target === modalOverlay) closeModal();
         });
 
+        // Аккордеон FAQ
         function toggleFaq(element) {
             const item = element.parentElement;
             item.classList.toggle('active');
         }
 
+        // Подписка
         function openSubscribeModal() {
             document.getElementById('subscribeModal').classList.add('active');
         }
@@ -944,8 +1019,9 @@
             closeSubscribeModal();
         }
 
+        // Видеоплеер
         function openVideoModal() {
-            const videoId = "dQw4w9WgXcQ"; 
+            const videoId = "dQw4w9WgXcQ"; // Замените на ID вашего видео на YouTube
             document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
             document.getElementById('videoModal').classList.add('active');
         }
@@ -962,6 +1038,36 @@
             if(e.target === document.getElementById('videoModal')) closeVideoModal();
         });
 
+        // СКРИПТ 3D ПАРАЛЛАКСА (Обработка мыши)
+        const container = document.getElementById('parallaxContainer');
+        const layers = container.querySelectorAll('.parallax-layer');
+
+        document.addEventListener('mousemove', (e) => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            
+            // Вычисляем смещение курсора относительно центра экрана (от -0.5 до 0.5)
+            const mouseX = (e.clientX / width) - 0.5;
+            const mouseY = (e.clientY / height) - 0.5;
+
+            layers.forEach(layer => {
+                const depth = layer.getAttribute('data-depth');
+                // Рассчитываем сдвиг по осям X и Y индивидуально для глубины каждого слоя
+                const moveX = mouseX * depth;
+                const moveY = mouseY * depth;
+                
+                layer.style.transform = `translate3d(${moveX}px, ${moveY}px, 0px)`;
+            });
+        });
+
+        // Возврат элементов в исходную точку, если мышь покинула окно документа
+        document.addEventListener('mouseleave', () => {
+            layers.forEach(layer => {
+                layer.style.transform = `translate3d(0px, 0px, 0px)`;
+            });
+        });
+
+        // Инициализация при загрузке
         document.addEventListener('DOMContentLoaded', renderProjects);
     </script>
 </body>
