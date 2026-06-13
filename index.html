@@ -18,7 +18,15 @@
         }
 
         body {
+            /* Бесшовный гемблинг-фон с помощью CSS-графики: сетка, неоновые отсветы и градиент */
             background-color: #0b0c10;
+            background-image: 
+                radial-gradient(circle at 80% 20%, rgba(255, 183, 3, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 20% 60%, rgba(179, 112, 214, 0.03) 0%, transparent 40%),
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+            background-attachment: fixed;
             color: #ffffff;
             line-height: 1.6;
             padding-bottom: 50px;
@@ -30,6 +38,8 @@
             max-width: 1100px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 2;
         }
 
         /* Шапка сайта (Header) */
@@ -39,6 +49,8 @@
             align-items: center;
             padding: 20px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(11, 12, 16, 0.5);
+            backdrop-filter: blur(10px);
         }
 
         .logo {
@@ -83,6 +95,7 @@
             font-size: 14px;
             font-weight: 600;
             transition: background 0.3s, color 0.3s;
+            background: transparent;
             cursor: pointer;
         }
 
@@ -93,7 +106,7 @@
 
         /* Главный баннер (Hero Section) */
         .hero {
-            padding: 60px 0 80px 0;
+            padding: 80px 0 100px 0;
             display: table;
             width: 100%;
             table-layout: fixed;
@@ -104,82 +117,88 @@
             width: 55%;
             vertical-align: middle;
             padding-right: 40px;
-            position: relative;
-            z-index: 2;
         }
 
-        /* Подходящий по тематике задний фон вместо фотографии */
+        /* Стилизация правой части: бесшовный атмосферный элемент казино */
         .hero-cell-image {
             display: table-cell;
             width: 45%;
             vertical-align: middle;
-            position: relative;
         }
 
         .hero-theme-bg {
             width: 100%;
-            height: 320px;
-            border-radius: 20px;
-            background: linear-gradient(135deg, #1f1907 0%, #101216 100%);
-            border: 1px solid rgba(255, 183, 3, 0.15);
+            height: 340px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(31, 25, 7, 0.6) 0%, rgba(16, 18, 22, 0.9) 100%);
+            border: 1px solid rgba(255, 183, 3, 0.25);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 0 30px rgba(255, 183, 3, 0.05);
+            backdrop-filter: blur(5px);
         }
 
-        /* Элементы гейминг/стрим графики внутри фона */
+        /* Геометрический узор казино (ромбы/сукно) внутри карточки */
         .hero-theme-bg::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             background-image: 
-                linear-gradient(rgba(255, 183, 3, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 183, 3, 0.05) 1px, transparent 1px);
-            background-size: 20px 20px;
+                linear-gradient(30deg, rgba(255, 183, 3, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(255, 183, 3, 0.03) 87.5%, rgba(255, 183, 3, 0.03)),
+                linear-gradient(150deg, rgba(255, 183, 3, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(255, 183, 3, 0.03) 87.5%, rgba(255, 183, 3, 0.03)),
+                linear-gradient(30deg, rgba(255, 183, 3, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(255, 183, 3, 0.03) 87.5%, rgba(255, 183, 3, 0.03)),
+                linear-gradient(150deg, rgba(255, 183, 3, 0.03) 12%, transparent 12.5%, transparent 87%, rgba(255, 183, 3, 0.03) 87.5%, rgba(255, 183, 3, 0.03));
+            background-size: 60px 104px;
+            background-position: 0 0, 0 0, 30px 52px, 30px 52px;
         }
 
-        .hero-theme-bg::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 180px;
-            height: 180px;
-            background: radial-gradient(circle, rgba(255, 183, 3, 0.25) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
-            filter: blur(10px);
-        }
-
-        .bg-glowing-elements {
+        /* Абстрактные светящиеся фишки и элементы азартных игр */
+        .gambling-elements {
             position: absolute;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
-        }
-
-        .bg-crown-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 70px;
-            color: rgba(255, 183, 3, 0.15);
-            text-shadow: 0 0 20px rgba(255, 183, 3, 0.4);
-            user-select: none;
             z-index: 2;
         }
 
-        .bg-pulse-circle {
+        .neon-slot-circle {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 240px;
-            height: 240px;
-            border: 1px solid rgba(255, 183, 3, 0.08);
+            width: 220px; height: 220px;
+            border: 2px dashed rgba(255, 183, 3, 0.3);
             border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 183, 3, 0.1);
         }
+
+        .center-crown {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px;
+            color: #ffb703;
+            text-shadow: 0 0 40px rgba(255, 183, 3, 0.6), 0 0 80px rgba(255, 183, 3, 0.2);
+            user-select: none;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) translateY(0px); }
+            50% { transform: translate(-50%, -50%) translateY(-10px); }
+            100% { transform: translate(-50%, -50%) translateY(0px); }
+        }
+
+        .decor-item {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0.25;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        .di-1 { top: 40px; left: 50px; color: #ffb703; transform: rotate(-15deg); }
+        .di-2 { bottom: 50px; right: 60px; color: #ff007f; transform: rotate(20deg); }
+        .di-3 { top: 60px; right: 50px; color: #3498db; transform: rotate(10deg); }
+        .di-4 { bottom: 60px; left: 70px; color: #ffb703; transform: rotate(-25deg); }
 
         .hero h1 {
             font-size: 52px;
@@ -230,13 +249,14 @@
 
         /* Секция списка проектов */
         .projects-section {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(20, 22, 29, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 16px;
             padding: 35px;
             position: relative;
             z-index: 3;
             margin-bottom: 30px;
+            backdrop-filter: blur(20px);
         }
 
         .section-header {
@@ -272,7 +292,7 @@
         .project-row {
             display: flex;
             align-items: center;
-            background: rgba(255, 255, 255, 0.01);
+            background: rgba(11, 12, 16, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: 12px;
             padding: 22px;
@@ -289,9 +309,9 @@
         }
 
         .project-row:hover {
-            border-color: rgba(255, 183, 3, 0.25);
+            border-color: rgba(255, 183, 3, 0.35);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 25px rgba(255, 183, 3, 0.08);
         }
 
         .project-number {
@@ -418,11 +438,11 @@
             color: #ffb703;
         }
 
-        /* Информационный блок снизу (Как это работает) */
+        /* Информационный блок снизу */
         .how-it-works {
             margin-top: 30px;
-            background: rgba(255, 183, 3, 0.02);
-            border: 1px dashed rgba(255, 183, 3, 0.15);
+            background: rgba(255, 183, 3, 0.03);
+            border: 1px dashed rgba(255, 183, 3, 0.25);
             border-radius: 12px;
             padding: 24px;
             display: flex;
@@ -462,13 +482,14 @@
             background: #1c1f2a;
         }
 
-        /* Стили для Секции FAQ (Аккордеон) */
+        /* Секция FAQ */
         .faq-section {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(20, 22, 29, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 16px;
             padding: 35px;
             margin-bottom: 30px;
+            backdrop-filter: blur(20px);
         }
 
         .faq-container {
@@ -479,7 +500,7 @@
         }
 
         .faq-item {
-            background: rgba(255, 255, 255, 0.01);
+            background: rgba(11, 12, 16, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: 10px;
             overflow: hidden;
@@ -527,15 +548,12 @@
             transition: max-height 0.3s cubic-bezier(1, 0, 1, 0), padding 0.3s ease;
         }
 
-        /* Общие стили для Модальных Окон (Popup) */
+        /* Модальные Окна */
         .modal-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(6px);
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -552,7 +570,7 @@
 
         .modal-content {
             background: #14161d;
-            border: 1px solid rgba(255, 183, 3, 0.2);
+            border: 1px solid rgba(255, 183, 3, 0.3);
             padding: 35px;
             border-radius: 16px;
             max-width: 500px;
@@ -560,7 +578,7 @@
             position: relative;
             transform: scale(0.9);
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.8);
         }
 
         .modal-overlay.active .modal-content {
@@ -569,8 +587,7 @@
 
         .modal-close {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 20px; right: 20px;
             background: transparent;
             border: none;
             color: #555;
@@ -600,7 +617,6 @@
             line-height: 1.6;
         }
 
-        /* Специфические стили для окна подписки */
         .subscribe-form {
             display: flex;
             flex-direction: column;
@@ -640,7 +656,6 @@
             box-shadow: 0 0 15px rgba(255, 183, 3, 0.3);
         }
 
-        /* Модалка для видеоплеера (Широкая) */
         .modal-video-content {
             max-width: 800px;
             padding: 10px;
@@ -649,20 +664,17 @@
 
         .video-wrapper {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 соотношение сторон */
+            padding-bottom: 56.25%;
             height: 0;
         }
 
         .video-wrapper iframe {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             border-radius: 8px;
         }
 
-        /* Подвал сайта (Footer) */
+        /* Подвал */
         footer {
             margin-top: 45px;
             display: flex;
@@ -690,7 +702,7 @@
             .hero, .hero-cell-text, .hero-cell-image { display: block; width: 100%; text-align: center; }
             .hero-cell-text { padding-right: 0; margin-bottom: 35px; }
             .hero-cell-image { text-align: center; }
-            .hero-theme-bg { max-width: 100%; height: 260px; }
+            .hero-theme-bg { max-width: 100%; height: 280px; }
             .hero p { margin-left: auto; margin-right: auto; }
             .features { justify-content: center; }
         }
@@ -708,7 +720,6 @@
 <body>
 
     <div class="container">
-        <!-- HEADER -->
         <header>
             <div class="logo" onclick="window.location.reload()">👑 TOP<span>ZANOSI</span></div>
             <nav>
@@ -721,7 +732,6 @@
             <button class="btn-subscribe" onclick="openSubscribeModal()">Подписаться</button>
         </header>
 
-        <!-- HERO SECTION -->
         <section class="hero">
             <div class="hero-cell-text">
                 <span style="color: #ffb703; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">▶ ТОП-10 ЗАНОСОВ СО СТРИМОВ</span>
@@ -736,17 +746,19 @@
                 </div>
             </div>
             <div class="hero-cell-image">
-                <!-- Заменяющий тематический графический элемент вместо фото -->
                 <div class="hero-theme-bg">
-                    <div class="bg-glowing-elements">
-                        <div class="bg-pulse-circle"></div>
-                        <div class="bg-crown-icon">👑</div>
+                    <div class="gambling-elements">
+                        <div class="neon-slot-circle"></div>
+                        <div class="center-crown">👑</div>
+                        <div class="decor-item di-1">🎰</div>
+                        <div class="decor-item di-2">💎</div>
+                        <div class="decor-item di-3">♠</div>
+                        <div class="decor-item di-4">🍒</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- MAIN PROJECTS -->
         <main class="projects-section">
             <div class="section-header">
                 <h2 class="section-title">Список проектов</h2>
@@ -764,7 +776,6 @@
             </div>
         </main>
 
-        <!-- FAQ SECTION -->
         <section class="faq-section" id="faq">
             <h2 class="section-title">Часто задаваемые вопросы</h2>
             <div class="faq-container">
@@ -783,7 +794,6 @@
             </div>
         </section>
 
-        <!-- FOOTER -->
         <footer>
             <div><span class="age-limit">18+</span> Играйте ответственно</div>
             <div>Все проекты из видео на канале Заносы Недели</div>
@@ -791,7 +801,6 @@
         </footer>
     </div>
 
-    <!-- MODAL 1: УСЛОВИЯ БОНУСА -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
@@ -800,7 +809,6 @@
         </div>
     </div>
 
-    <!-- MODAL 2: ПОДПИСКА -->
     <div class="modal-overlay" id="subscribeModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeSubscribeModal()">&times;</button>
@@ -813,7 +821,6 @@
         </div>
     </div>
 
-    <!-- MODAL 3: ПРОСМОТР ВИДЕО (YOUTUBE) -->
     <div class="modal-overlay" id="videoModal">
         <div class="modal-content modal-video-content">
             <button class="modal-close" onclick="closeVideoModal()" style="color: #fff; z-index: 1010; top: 10px; right: 10px;">&times;</button>
@@ -823,7 +830,6 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
     <script>
         const projectsData = [
             {
@@ -861,7 +867,6 @@
             }
         ];
 
-        // Рендеринг карточек проектов
         function renderProjects() {
             const listContainer = document.getElementById('projects-list');
             listContainer.innerHTML = '';
@@ -897,7 +902,6 @@
             });
         }
 
-        // Модалка 1: Условия бонуса
         const modalOverlay = document.getElementById('modalOverlay');
         const modalTitle = document.getElementById('modalTitle');
         const modalText = document.getElementById('modalText');
@@ -919,13 +923,11 @@
             if(e.target === modalOverlay) closeModal();
         });
 
-        // FAQ: Аккордеон раскрытия вопросов
         function toggleFaq(element) {
             const item = element.parentElement;
             item.classList.toggle('active');
         }
 
-        // Модалка 2: Окно подписки
         function openSubscribeModal() {
             document.getElementById('subscribeModal').classList.add('active');
         }
@@ -942,7 +944,6 @@
             closeSubscribeModal();
         }
 
-        // Модалка 3: Видеоплеер (встраивание YouTube iframe)
         function openVideoModal() {
             const videoId = "dQw4w9WgXcQ"; 
             document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
@@ -954,7 +955,6 @@
             document.getElementById('videoModal').classList.remove('active');
         }
 
-        // Закрытие по клику на фон (оверлей) для окон подписки и видео
         document.getElementById('subscribeModal').addEventListener('click', (e) => {
             if(e.target === document.getElementById('subscribeModal')) closeSubscribeModal();
         });
@@ -962,7 +962,6 @@
             if(e.target === document.getElementById('videoModal')) closeVideoModal();
         });
 
-        // Инициализация при загрузке документа
         document.addEventListener('DOMContentLoaded', renderProjects);
     </script>
 </body>
