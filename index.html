@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOP ZANOSI - Проекты из видео</title>
+    <style>
+        /* Общие стили и сброс настроек */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b0c10;
+            color: #ffffff;
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Шапка сайта (Header) */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: #ffb703;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: #aaaaaa;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #fff;
+        }
+
+        .btn-subscribe {
+            border: 1px solid #ffb703;
+            color: #ffb703;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .btn-subscribe:hover {
+            background: #ffb703;
+            color: #000;
+        }
+
+        /* Главный баннер (Hero Section) */
+        .hero {
+            padding: 60px 0;
+            text-align: left;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+
+        .hero h1 span {
+            color: #ffb703;
+            display: block;
+        }
+
+        .hero p {
+            color: #cccccc;
+            max-width: 500px;
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+
+        /* Преимущества (Features) */
+        .features {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .feature-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            font-size: 14px;
+            color: #aaaaaa;
+            max-width: 120px;
+        }
+
+        .feature-item strong {
+            color: #fff;
+        }
+
+        /* Секция списка проектов */
+        .projects-section {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-left: 4px solid #ffb703;
+            padding-left: 10px;
+        }
+
+        .section-subtitle {
+            font-size: 12px;
+            color: #666666;
+        }
+
+        /* Карточка проекта (Project Row) */
+        .project-row {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .project-row:hover {
+            border-color: rgba(255, 183, 3, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .project-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ffb703;
+            width: 40px;
+        }
+
+        .project-logo {
+            width: 140px;
+            height: 60px;
+            background: #14161d;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: 1px;
+            margin-right: 25px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Цвета для брендов (примеры) */
+        .logo-gama { color: #ff007f; }
+        .logo-r7 { color: #f4d03f; }
+        .logo-1win { color: #3498db; }
+
+        .project-info {
+            flex: 1;
+        }
+
+        .project-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .project-streamers {
+            font-size: 12px;
+            color: #777777;
+            margin-bottom: 8px;
+        }
+
+        .tag-video {
+            display: inline-block;
+            font-size: 10px;
+            background: rgba(155, 89, 182, 0.2);
+            color: #9b59b6;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .project-bonus {
+            flex: 1;
+            padding-left: 20px;
+        }
+
+        .bonus-label {
+            font-size: 11px;
+            color: #ffb703;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+
+        .bonus-value {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .bonus-value span {
+            color: #aaaaaa;
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        .project-action {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .btn-go {
+            background: transparent;
+            border: 1px solid #ffb703;
+            color: #ffb703;
+            padding: 12px 30px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .btn-go:hover {
+            background: #ffb703;
+            color: #000;
+        }
+
+        .terms-link {
+            font-size: 11px;
+            color: #555555;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .terms-link:hover {
+            color: #888888;
+        }
+
+        /* Информационный блок снизу (Как это работает) */
+        .how-it-works {
+            margin-top: 25px;
+            background: rgba(255, 183, 3, 0.03);
+            border: 1px dashed rgba(255, 183, 3, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .how-text h4 {
+            color: #ffb703;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .how-text p {
+            font-size: 13px;
+            color: #aaaaaa;
+        }
+
+        .btn-watch {
+            background: #14161d;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            transition: background 0.3s;
+        }
+
+        .btn-watch:hover {
+            background: #1c1f2a;
+        }
+
+        /* Подвал сайта (Footer) */
+        footer {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #555555;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 20px;
+        }
+
+        .age-limit {
+            border: 1px solid #555555;
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">👑 TOP<span>ZANOSI</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Проекты</a></li>
+                    <li><a href="#">Бонусы</a></li>
+                    <li><a href="#">О видео</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+            </nav>
+            <a href="#" class="btn-subscribe">Подписаться</a>
+        </header>
+
+        <section class="hero">
+            <div style="max-width: 600px;">
+                <span style="color: #ffb703; font-size: 12px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">▶ ТОП-10 ЗАНОСОВ СО СТРИМОВ</span>
+                <h1 style="margin-top: 10px;">Проекты<br><span>из видео</span></h1>
+                <p>Все проекты из моих нарезок, в которых играют топовые стримеры. Регистрируйся и забирай эксклюзивные бонусы!</p>
+                
+                <div class="features">
+                    <div class="feature-item">
+                        <strong>Проверенные</strong> проекты
+                    </div>
+                    <div class="feature-item">
+                        <strong>Эксклюзивные</strong> бонусы
+                    </div>
+                    <div class="feature-item">
+                        <strong>Топовые</strong> стримеры
+                    </div>
+                    <div class="feature-item">
+                        <strong>Проекты</strong> из видео
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <main class="projects-section">
+            <div class="section-header">
+                <h2 class="section-title">Список проектов</h2>
+                <span class="section-subtitle">Нажми на проект, чтобы перейти и забрать бонус</span>
+            </div>
+
+            <div class="project-row">
+                <div class="project-number">01</div>
+                <div class="project-logo logo-gama">GAMA</div>
+                <div class="project-info">
+                    <div class="project-name">Gama Casino</div>
+                    <div class="project-streamers">Стримеры: Zubarefff, Bratishkinoff, Zernovka</div>
+                    <span class="tag-video">из видео</span>
+                </div>
+                <div class="project-bonus">
+                    <div class="bonus-label">Бонусы</div>
+                    <div class="bonus-value">100% <span>на депозит</span></div>
+                    <div class="bonus-value" style="font-size: 15px; color: #ffb703;">+ 100 FS</div>
+                </div>
+                <div class="project-action">
+                    <a href="#" class="btn-go">Перейти &gt;</a>
+                    <span class="terms-link">Условия бонуса</span>
+                </div>
+            </div>
+
+            <div class="project-row">
+                <div class="project-number">02</div>
+                <div class="project-logo logo-r7">R7</div>
+                <div class="project-info">
+                    <div class="project-name">R7 Casino</div>
+                    <div class="project-streamers">Стримеры: xQc, Drakesoul, Maks</div>
+                    <span class="tag-video">из видео</span>
+                </div>
+                <div class="project-bonus">
+                    <div class="bonus-label">Бонусы</div>
+                    <div class="bonus-value">200% <span>на депозит</span></div>
+                    <div class="bonus-value" style="font-size: 15px; color: #ffb703;">+ 100 FS</div>
+                </div>
+                <div class="project-action">
+                    <a href="#" class="btn-go">Перейти &gt;</a>
+                    <span class="terms-link">Условия бонуса</span>
+                </div>
+            </div>
+
+            <div class="project-row">
+                <div class="project-number">03</div>
+                <div class="project-logo logo-1win">1win</div>
+                <div class="project-info">
+                    <div class="project-name">1win</div>
+                    <div class="project-streamers">Стримеры: TTR, Ludojop, Shamil</div>
+                    <span class="tag-video">из видео</span>
+                </div>
+                <div class="project-bonus">
+                    <div class="bonus-label">Бонусы</div>
+                    <div class="bonus-value">500% <span>на депозит</span></div>
+                    <div class="bonus-value" style="font-size: 15px; color: #ffb703;">+ 250 FS</div>
+                </div>
+                <div class="project-action">
+                    <a href="#" class="btn-go">Перейти &gt;</a>
+                    <span class="terms-link">Условия бонуса</span>
+                </div>
+            </div>
+
+            <div class="how-it-works">
+                <div class="how-text">
+                    <h4>Как это работает?</h4>
+                    <p>Смотри мои видео с топ-10 заносами → переходи по ссылке на проект → регистрируйся → забирай эксклюзивный бонус!</p>
+                </div>
+                <a href="#" class="btn-watch">Смотреть видео ▶</a>
+            </div>
+        </main>
+
+        <footer>
+            <div>
+                <span class="age-limit">18+</span> Играйте ответственно
+            </div>
+            <div>Все проекты из видео на канале TOP ZANOSI</div>
+            <div>🔄 Обновление списка каждые 7 дней</div>
+        </footer>
+    </div>
+
+</body>
+</html>
