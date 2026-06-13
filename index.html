@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOP ZANOSI - Проекты из видео</title>
-    <!-- Подключаем современный шрифт Inter через Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     
     <style>
-        /* Общие стили и сброс настроек */
         * {
             margin: 0;
             padding: 0;
@@ -24,7 +22,6 @@
             line-height: 1.6;
             padding-bottom: 50px;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
@@ -33,7 +30,6 @@
             padding: 20px;
         }
 
-        /* Шапка сайта (Header) */
         header {
             display: flex;
             justify-content: space-between;
@@ -53,27 +49,11 @@
             letter-spacing: -0.5px;
         }
 
-        .logo span {
-            color: #ffb703;
-        }
+        .logo span { color: #ffb703; }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        nav ul li a {
-            color: #aaaaaa;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: #fff;
-        }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav ul li a { color: #aaaaaa; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.3s; }
+        nav ul li a:hover { color: #fff; }
 
         .btn-subscribe {
             border: 1px solid #ffb703;
@@ -83,535 +63,170 @@
             text-decoration: none;
             font-size: 14px;
             font-weight: 600;
+            cursor: pointer;
             transition: background 0.3s, color 0.3s;
         }
 
-        .btn-subscribe:hover {
-            background: #ffb703;
-            color: #000;
+        .btn-subscribe:hover { background: #ffb703; color: #000; }
+
+        .hero { padding: 40px 0 60px 0; display: table; width: 100%; table-layout: fixed; }
+        .hero-cell-text { display: table-cell; width: 50%; vertical-align: middle; padding-right: 20px; }
+        .hero-cell-image { display: table-cell; width: 50%; vertical-align: middle; text-align: right; }
+
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 0 50px rgba(255, 183, 3, 0.15), 0 10px 30px rgba(0, 0, 0, 0.7);
         }
 
-        /* Главный баннер (Hero Section) */
-        .hero {
-            padding: 50px 0 70px 0;
-            display: table;
-            width: 100%;
-            table-layout: fixed;
-        }
+        .hero h1 { font-size: 52px; text-transform: uppercase; line-height: 1.05; margin-bottom: 22px; font-weight: 900; letter-spacing: -1px; }
+        .hero h1 span { color: #ffb703; display: block; }
+        .hero p { color: #9da4b0; font-size: 15px; margin-bottom: 40px; max-width: 480px; }
 
-        .hero-cell-text {
-            display: table-cell;
-            width: 55%;
-            vertical-align: middle;
-            padding-right: 20px;
-        }
+        .features { display: flex; gap: 30px; margin-bottom: 40px; flex-wrap: wrap; }
+        .feature-item { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #8a92a6; max-width: 130px; }
+        .feature-item strong { color: #fff; font-weight: 700; font-size: 14px; }
 
-        .hero-cell-image {
-            display: table-cell;
-            width: 45%;
-            vertical-align: middle;
-            text-align: right;
-        }
-
-        /* HTML/CSS Иллюстрация вместо битой картинки */
-        .hero-graphics-container {
-            display: inline-block;
-            width: 100%;
-            max-width: 420px;
-            height: 320px;
-            position: relative;
-            background: radial-gradient(circle at center, rgba(255, 183, 3, 0.15) 0%, transparent 70%);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .graphic-element {
-            position: absolute;
-            border-radius: 50%;
-        }
-
-        /* Стилизованные круги, напоминающие рулетку */
-        .roulette-circle-1 {
-            width: 260px;
-            height: 260px;
-            border: 2px dashed rgba(255, 183, 3, 0.4);
-            top: 30px;
-            right: 40px;
-            animation: rotateClockwise 40s linear infinite;
-        }
-
-        .roulette-circle-2 {
-            width: 180px;
-            height: 180px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            top: 70px;
-            right: 80px;
-        }
-
-        /* Стилизованные фишки / элементы джекпота */
-        .casino-badge {
-            position: absolute;
-            background: linear-gradient(135deg, #ffb703 0%, #ff8f00 100%);
-            color: #000;
-            padding: 12px 24px;
-            border-radius: 12px;
-            font-weight: 900;
-            font-size: 20px;
-            letter-spacing: 1px;
-            box-shadow: 0 10px 25px rgba(255, 183, 3, 0.4);
-            top: 130px;
-            right: 120px;
-            transform: rotate(-5deg);
-            text-transform: uppercase;
-        }
-
-        .neon-glow-1 {
-            width: 80px;
-            height: 80px;
-            background: #ff007f;
-            filter: blur(40px);
-            top: 60px;
-            right: 220px;
-            opacity: 0.6;
-        }
-
-        .neon-glow-2 {
-            width: 100px;
-            height: 100px;
-            background: #ffb703;
-            filter: blur(50px);
-            bottom: 40px;
-            right: 60px;
-            opacity: 0.5;
-        }
-
-        .mini-card {
-            position: absolute;
-            width: 50px;
-            height: 75px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            backdrop-filter: blur(4px);
-            top: 80px;
-            right: 70px;
-            transform: rotate(15deg);
-        }
-
-        .mini-card-2 {
-            position: absolute;
-            width: 50px;
-            height: 75px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 6px;
-            backdrop-filter: blur(4px);
-            top: 95px;
-            right: 50px;
-            transform: rotate(30deg);
-        }
-
-        @keyframes rotateClockwise {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .hero h1 {
-            font-size: 52px;
-            text-transform: uppercase;
-            line-height: 1.05;
-            margin-bottom: 22px;
-            font-weight: 900;
-            letter-spacing: -1px;
-        }
-
-        .hero h1 span {
-            color: #ffb703;
-            display: block;
-        }
-
-        .hero p {
-            color: #9da4b0;
-            font-size: 15px;
-            font-weight: 400;
-            margin-bottom: 40px;
-            max-width: 480px;
-            line-height: 1.7;
-        }
-
-        /* Преимущества (Features) */
-        .features {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .feature-item {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            font-size: 13px;
-            color: #8a92a6;
-            max-width: 130px;
-            line-height: 1.4;
-        }
-
-        .feature-item strong {
-            color: #fff;
-            font-weight: 700;
-            font-size: 14px;
-        }
-
-        /* Секция списка проектов */
         .projects-section {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: 16px;
             padding: 35px;
-            position: relative;
-            z-index: 3;
+            margin-bottom: 40px;
         }
 
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 10px; }
+        .section-title { font-size: 22px; font-weight: 700; text-transform: uppercase; border-left: 4px solid #ffb703; padding-left: 12px; }
+        .section-subtitle { font-size: 13px; color: #6c757d; }
 
-        .section-title {
-            font-size: 22px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-left: 4px solid #ffb703;
-            padding-left: 12px;
-        }
-
-        .section-subtitle {
-            font-size: 13px;
-            color: #6c757d;
-            font-weight: 400;
-        }
-
-        /* Динамический контейнер для карточек */
-        #projects-list {
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Карточка проекта (Project Row) */
+        /* Карточки */
         .project-row {
-            display: flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.01);
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            border-radius: 12px;
-            padding: 22px;
-            margin-bottom: 16px;
-            opacity: 0;
-            transform: translateY(20px);
+            display: flex; align-items: center; background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 12px; padding: 22px; margin-bottom: 16px;
+            opacity: 0; transform: translateY(20px);
             transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
         }
+        .project-row.visible { opacity: 1; transform: translateY(0); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .project-row:hover { border-color: rgba(255, 183, 3, 0.25); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); }
 
-        .project-row.visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s, box-shadow 0.2s;
-        }
+        .project-number { font-size: 16px; font-weight: 700; color: #ffb703; width: 40px; }
+        .project-logo { width: 140px; height: 60px; background: #14161d; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; margin-right: 25px; border: 1px solid rgba(255,255,255,0.04); }
+        .project-info { flex: 1; }
+        .project-name { font-size: 18px; font-weight: 700; margin-bottom: 5px; }
+        .project-streamers { font-size: 13px; color: #6c757d; margin-bottom: 10px; }
+        .tag-video { display: inline-block; font-size: 10px; background: rgba(179, 112, 214, 0.12); color: #c58ee2; padding: 3px 10px; border-radius: 6px; text-transform: uppercase; font-weight: 700; }
 
-        .project-row:hover {
-            border-color: rgba(255, 183, 3, 0.25);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-        }
+        .project-bonus { flex: 1; padding-left: 20px; }
+        .bonus-label { font-size: 11px; color: #ffb703; text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+        .bonus-value { font-size: 19px; font-weight: 700; }
+        .bonus-value span { color: #8a92a6; font-size: 14px; font-weight: 400; }
+        .bonus-fs { font-size: 15px; color: #ffb703; font-weight: 700; margin-top: 2px; }
 
-        .project-number {
-            font-size: 16px;
-            font-weight: 700;
-            color: #ffb703;
-            width: 40px;
-            font-variant-numeric: tabular-nums;
-        }
+        .project-action { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+        .btn-go { background: transparent; border: 1px solid #ffb703; color: #ffb703; padding: 12px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 14px; transition: all 0.3s; }
+        .btn-go:hover { background: #ffb703; color: #000; box-shadow: 0 0 20px rgba(255, 183, 3, 0.3); }
+        .terms-link { font-size: 12px; color: #495057; text-decoration: underline; cursor: pointer; transition: color 0.2s; }
+        .terms-link:hover { color: #ffb703; }
 
-        .project-logo {
-            width: 140px;
-            height: 60px;
-            background: #14161d;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 18px;
-            letter-spacing: 0.5px;
-            margin-right: 25px;
-            border: 1px solid rgba(255,255,255,0.04);
-        }
-
-        .project-info {
-            flex: 1;
-        }
-
-        .project-name {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            letter-spacing: -0.3px;
-        }
-
-        .project-streamers {
-            font-size: 13px;
-            color: #6c757d;
-            margin-bottom: 10px;
-            font-weight: 400;
-        }
-
-        .tag-video {
-            display: inline-block;
-            font-size: 10px;
-            background: rgba(179, 112, 214, 0.12);
-            color: #c58ee2;
-            padding: 3px 10px;
-            border-radius: 6px;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .project-bonus {
-            flex: 1;
-            padding-left: 20px;
-        }
-
-        .bonus-label {
-            font-size: 11px;
-            color: #ffb703;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .bonus-value {
-            font-size: 19px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-        }
-
-        .bonus-value span {
-            color: #8a92a6;
-            font-size: 14px;
-            font-weight: 400;
-        }
-
-        .bonus-fs {
-            font-size: 15px; 
-            color: #ffb703;
-            font-weight: 700;
-            margin-top: 2px;
-        }
-
-        .project-action {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 10px;
-        }
-
-        .btn-go {
-            background: transparent;
-            border: 1px solid #ffb703;
-            color: #ffb703;
-            padding: 12px 32px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
-            transition: background 0.3s, color 0.3s, box-shadow 0.3s;
-        }
-
-        .btn-go:hover {
-            background: #ffb703;
-            color: #000;
-            box-shadow: 0 0 20px rgba(255, 183, 3, 0.3);
-        }
-
-        .terms-link {
-            font-size: 12px;
-            color: #495057;
-            text-decoration: underline;
-            cursor: pointer;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .terms-link:hover {
-            color: #ffb703;
-        }
-
-        /* Информационный блок снизу (Как это работает) */
         .how-it-works {
-            margin-top: 30px;
-            background: rgba(255, 183, 3, 0.02);
-            border: 1px dashed rgba(255, 183, 3, 0.15);
-            border-radius: 12px;
-            padding: 24px;
+            background: rgba(255, 183, 3, 0.02); border: 1px dashed rgba(255, 183, 3, 0.15); border-radius: 12px; padding: 24px;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
+        }
+        .how-text h4 { color: #ffb703; margin-bottom: 6px; font-size: 16px; font-weight: 700; }
+        .how-text p { font-size: 13px; color: #8a92a6; }
+        .btn-watch { background: #14161d; border: 1px solid rgba(255,255,255,0.08); color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
+        .btn-watch:hover { background: #1c1f2a; }
+
+        /* ИНТЕРАКТИВНЫЙ БЛОК FAQ (АККОРДЕОН) */
+        .faq-section {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            padding: 35px;
+            margin-bottom: 40px;
+        }
+        .faq-item {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 18px 0;
+        }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-question {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .how-text h4 {
-            color: #ffb703;
-            margin-bottom: 6px;
             font-size: 16px;
-            font-weight: 700;
-        }
-
-        .how-text p {
-            font-size: 13px;
-            color: #8a92a6;
-            font-weight: 400;
-        }
-
-        .btn-watch {
-            background: #14161d;
-            border: 1px solid rgba(255,255,255,0.08);
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 13px;
             font-weight: 600;
-            transition: background 0.3s;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s;
+        }
+        .faq-question:hover { color: #ffb703; }
+        .faq-icon {
+            font-size: 18px;
+            color: #ffb703;
+            transition: transform 0.3s ease;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            color: #8a92a6;
+            font-size: 14px;
+            transition: max-height 0.3s ease, margin-top 0.3s ease;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px; /* Достаточно для текста */
+            margin-top: 12px;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
         }
 
-        .btn-watch:hover {
-            background: #1c1f2a;
-        }
-
-        /* Стили для Модального Окна (Popup) */
+        /* МОДАЛЬНЫЕ ОКНА (Общие стили) */
         .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(6px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            z-index: 1000;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(6px);
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s ease; z-index: 1000;
         }
-
-        .modal-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
         .modal-content {
-            background: #14161d;
-            border: 1px solid rgba(255, 183, 3, 0.2);
-            padding: 35px;
-            border-radius: 16px;
-            max-width: 500px;
-            width: 90%;
-            position: relative;
-            transform: scale(0.9);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #14161d; border: 1px solid rgba(255, 183, 3, 0.2);
+            padding: 35px; border-radius: 16px; max-width: 500px; width: 90%;
+            position: relative; transform: scale(0.9); transition: transform 0.3s ease;
             box-shadow: 0 15px 40px rgba(0,0,0,0.6);
         }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+        .modal-close { position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: #555; font-size: 24px; cursor: pointer; }
+        .modal-close:hover { color: #fff; }
+        .modal-title { font-size: 20px; font-weight: 700; color: #ffb703; margin-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 12px; }
 
-        .modal-overlay.active .modal-content {
-            transform: scale(1);
+        /* Форма подписки внутри модалки */
+        .subscribe-form { display: flex; flex-direction: column; gap: 15px; margin-top: 15px; }
+        .subscribe-input {
+            background: #0b0c10; border: 1px solid rgba(255,255,255,0.1);
+            padding: 14px; border-radius: 8px; color: #fff; font-size: 14px; outline: none;
         }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: transparent;
-            border: none;
-            color: #555;
-            font-size: 24px;
-            cursor: pointer;
-            transition: color 0.2s;
+        .subscribe-input:focus { border-color: #ffb703; }
+        .btn-submit {
+            background: #ffb703; color: #000; border: none; padding: 14px;
+            border-radius: 8px; font-weight: 700; font-size: 14px; cursor: pointer; transition: background 0.2s;
         }
+        .btn-submit:hover { background: #ffa200; }
 
-        .modal-close:hover {
-            color: #fff;
-        }
+        footer { margin-top: 45px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #495057; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 25px; flex-wrap: wrap; gap: 10px; }
+        .age-limit { border: 1px solid #495057; padding: 2px 6px; border-radius: 4px; font-weight: 700; }
 
-        .modal-title {
-            font-size: 20px;
-            font-weight: 700;
-            color: #ffb703;
-            margin-bottom: 18px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            padding-bottom: 12px;
-            letter-spacing: -0.3px;
-        }
-
-        .modal-text {
-            font-size: 14px;
-            color: #adb5bd;
-            white-space: pre-line;
-            line-height: 1.6;
-        }
-
-        /* Подвал сайта (Footer) */
-        footer {
-            margin-top: 45px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 12px;
-            color: #495057;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 25px;
-            flex-wrap: wrap;
-            gap: 10px;
-            font-weight: 500;
-        }
-
-        .age-limit {
-            border: 1px solid #495057;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-right: 10px;
-            font-weight: 700;
-        }
-
-        /* Адаптивность */
         @media (max-width: 850px) {
             .hero, .hero-cell-text, .hero-cell-image { display: block; width: 100%; text-align: center; }
             .hero-cell-text { padding-right: 0; margin-bottom: 35px; }
-            .hero-cell-image { text-align: center; }
-            .hero-graphics-container { max-width: 100%; height: 260px; margin-top: 10px; }
-            .roulette-circle-1 { top: 10px; right: calc(50% - 130px); }
-            .roulette-circle-2 { top: 50px; right: calc(50% - 90px); }
-            .casino-badge { top: 100px; right: calc(50% - 75px); }
-            .mini-card { top: 50px; right: calc(50% - 130px); }
-            .mini-card-2 { top: 65px; right: calc(50% - 150px); }
-            .hero p { margin-left: auto; margin-right: auto; }
+            .hero-image { max-width: 85%; }
             .features { justify-content: center; }
         }
-
         @media (max-width: 550px) {
-            header { flex-direction: column; gap: 15px; text-align: center; }
+            header { flex-direction: column; gap: 15px; }
             nav ul { gap: 15px; }
-            .project-row { flex-direction: column; text-align: center; gap: 18px; padding: 25px 15px; }
+            .project-row { flex-direction: column; text-align: center; gap: 18px; }
             .project-logo { margin-right: 0; }
             .project-bonus { padding-left: 0; }
             .project-action { align-items: center; }
@@ -621,29 +236,25 @@
 <body>
 
     <div class="container">
-        <!-- Шапка -->
         <header>
             <div class="logo" onclick="window.location.reload()">👑 TOP<span>ZANOSI</span></div>
             <nav>
                 <ul>
                     <li><a href="#">Проекты</a></li>
                     <li><a href="#">Бонусы</a></li>
-                    <li><a href="#">О видео</a></li>
-                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#faq">FAQ</a></li>
                     <li><a href="#">Контакты</a></li>
                 </ul>
             </nav>
-            <a href="#" class="btn-subscribe">Подписаться</a>
+            <div class="btn-subscribe" onclick="openSubscribeModal()">Подписаться</div>
         </header>
 
-        <!-- Главный баннер -->
         <section class="hero">
             <div class="hero-cell-text">
                 <span style="color: #ffb703; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">▶ ТОП-10 ЗАНОСОВ СО СТРИМОВ</span>
                 <h1 style="margin-top: 12px;">Проекты<br><span>из видео</span></h1>
                 <p>Все проекты из моих нарезок, в которых играют топовые стримеры. Регистрируйся и забирай эксклюзивные бонусы!</p>
                 
-                <!-- Преимущества -->
                 <div class="features">
                     <div class="feature-item"><strong>Проверенные</strong> проекты</div>
                     <div class="feature-item"><strong>Эксклюзивные</strong> бонусы</div>
@@ -652,40 +263,63 @@
                 </div>
             </div>
             <div class="hero-cell-image">
-                <!-- Векторная анимированная графика вместо битой картинки -->
-                <div class="hero-graphics-container">
-                    <div class="graphic-element neon-glow-1"></div>
-                    <div class="graphic-element neon-glow-2"></div>
-                    <div class="graphic-element roulette-circle-1"></div>
-                    <div class="graphic-element roulette-circle-2"></div>
-                    <div class="mini-card"></div>
-                    <div class="mini-card-2"></div>
-                    <div class="casino-badge">777 Zanos</div>
-                </div>
+                <img src="https://picsum.photos/id/260/500/400" alt="Top Zanosi Иллюстрация" class="hero-image">
             </div>
         </section>
 
-        <!-- Основной контент: Список проектов -->
         <main class="projects-section">
             <div class="section-header">
                 <h2 class="section-title">Список проектов</h2>
                 <span class="section-subtitle">Нажми на проект, чтобы перейти и забрать бонус</span>
             </div>
 
-            <!-- Контейнер для динамических карточек -->
             <div id="projects-list"></div>
 
-            <!-- Инфо-блок под списком -->
             <div class="how-it-works">
                 <div class="how-text">
                     <h4>Как это работает?</h4>
                     <p>Смотри мои видео с топ-10 заносами → переходи по ссылке на проект → регистрируйся → забирай эксклюзивный бонус!</p>
                 </div>
-                <a href="#" class="btn-watch">Смотреть видео ▶</a>
+                <div class="btn-watch" onclick="openVideoModal()">Смотреть видео ▶</div>
             </div>
         </main>
 
-        <!-- Подвал -->
+        <section class="faq-section" id="faq">
+            <div class="section-header">
+                <h2 class="section-title">Часто задаваемые вопросы</h2>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Как часто обновляются бонусы в списке?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    Мы проверяем актуальность всех предложений и промокодов каждые 7 дней. Если у проекта меняются условия или добавляется новый приветственный пакет, информация обновляется мгновенно.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Нужно ли вводить промокод при регистрации?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    В большинстве случаев промокод не требуется — достаточно перейти по прямой ссылке с нашего сайта («Перейти >»). Эксклюзивный бонус привязывается к вашему аккаунту автоматически.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Что делать, если бонус не начислился?</span>
+                    <span class="faq-icon">+</span>
+                </div>
+                <div class="faq-answer">
+                    Убедитесь, что вы регистрируетесь в проекте впервые и у вас не было старых аккаунтов. Также перед переходом рекомендуется очистить куки (cookie) браузера или использовать режим инкогнито. Если это не помогло, напишите в поддержку самого проекта.
+                </div>
+            </div>
+        </section>
+
         <footer>
             <div><span class="age-limit">18+</span> Играйте ответственно</div>
             <div>Все проекты из видео на канале TOP ZANOSI</div>
@@ -693,79 +327,46 @@
         </footer>
     </div>
 
-    <!-- Структура Модального Окна (Условия бонуса) -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
-            <button class="modal-close" id="modalClose">&times;</button>
+            <button class="modal-close" onclick="closeModal('modalOverlay')">&times;</button>
             <h3 class="modal-title" id="modalTitle">Условия бонуса</h3>
-            <p class="modal-text" id="modalText">Текст условий...</p>
+            <p id="modalText" style="font-size: 14px; color: #adb5bd; white-space: pre-line;"></p>
         </div>
     </div>
 
-    <!-- JAVASCRIPT УПРАВЛЕНИЕ ДАННЫМИ И АНИМАЦИЕЙ -->
+    <div class="modal-overlay" id="subscribeModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('subscribeModal')">&times;</button>
+            <h3 class="modal-title">Закрытые бонусы для подписчиков</h3>
+            <p style="font-size: 14px; color: #8a92a6;">Оставьте ваш Email, чтобы первыми получать секретные промокоды и уведомления о новых заносах.</p>
+            <form class="subscribe-form" onsubmit="handleSubscribe(event)">
+                <input type="email" class="subscribe-input" placeholder="Введите ваш Email" required>
+                <button type="submit" class="btn-submit">Получать бонусы</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="videoModal">
+        <div class="modal-content" style="max-width: 700px; padding: 20px;">
+            <button class="modal-close" onclick="closeVideoModal()">&times;</button>
+            <h3 class="modal-title">Последний выпуск TOP ZANOSI</h3>
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px;">
+                <iframe id="videoPlayer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
     <script>
         const projectsData = [
-            {
-                id: "01",
-                name: "Gama Casino",
-                logoText: "GAMA",
-                logoColor: "#ff007f",
-                streamers: "Zubarefff, Bratishkinoff, Zernovka",
-                bonusText: "100% на депозит",
-                bonusExtra: "+ 100 FS",
-                link: "https://example.com/gama",
-                terms: "1. Бонус доступен только для новых игроков.\n2. Вейджер на бонус составляет х45.\n3. Минимальный депозит для активации — 1000 руб.\n4. Фриспины начисляются частями в течение 24 часов."
-            },
-            {
-                id: "02",
-                name: "R7 Casino",
-                logoText: "R7",
-                logoColor: "#f4d03f",
-                streamers: "xQc, Drakesoul, Maks",
-                bonusText: "200% на депозит",
-                bonusExtra: "+ 100 FS",
-                link: "https://example.com/r7",
-                terms: "1. Максимальный размер бонуса — 50 000 руб.\n2. Вейджер на денежную часть х40, на фриспины х35.\n3. Требуется обязательная верификация аккаунта для вывода."
-            },
-            {
-                id: "03",
-                name: "1win",
-                logoText: "1win",
-                logoColor: "#3498db",
-                streamers: "Dosaia, SilverName, Ludwig",
-                bonusText: "500% на депозит",
-                bonusExtra: "+ 250 FS",
-                link: "https://example.com/1win",
-                terms: "1. Бонус распределяется на первые 4 депозита.\n2. +200% на первый, +150% на второй, +100% на третий и +50% на четвертый.\n3. Отыгрыш происходит автоматически при проигрышных ставках."
-            },
-            {
-                id: "04",
-                name: "Azino 777",
-                logoText: "AZINO 777",
-                logoColor: "#e74c3c",
-                streamers: "Evelone192, Vladizub, Buster",
-                bonusText: "150 FS без депозита",
-                bonusExtra: "+ 100% на депозит",
-                link: "https://example.com/azino",
-                terms: "1. Бездепозитные фриспины выдаются за подтверждение номера мобильного телефона.\n2. Максимальный вывод с бездепозитного бонуса ограничен суммой в 5 000 руб.\n3. На первый депозит установлен вейджер х30."
-            },
-            {
-                id: "05",
-                name: "Kent Casino",
-                logoText: "KENT",
-                logoColor: "#1abc9c",
-                streamers: "Buster, Leva2k, Follentass",
-                bonusText: "100% на депозит",
-                bonusExtra: "+ 50 FS",
-                link: "https://example.com/kent",
-                terms: "1. Минимальный депозит для активации предложения — 500 руб.\n2. Срок действия бонуса составляет 7 дней с момента активации.\n3. Стандартный вейджер х40 на сумму бонуса."
-            }
+            { id: "01", name: "Gama Casino", logoText: "GAMA", logoColor: "#ff007f", streamers: "Zubarefff, Bratishkinoff", bonusText: "100% на депозит", bonusExtra: "+ 100 FS", link: "#", terms: "1. Только для новых игроков.\n2. Вейджер х45.\n3. Мин. депозит — 1000 руб." },
+            { id: "02", name: "R7 Casino", logoText: "R7", logoColor: "#f4d03f", streamers: "xQc, Drakesoul", bonusText: "200% на депозит", bonusExtra: "+ 100 FS", link: "#", terms: "1. Макс. бонус — 50 000 руб.\n2. Вейджер х40.\n3. Требуется верификация." },
+            { id: "03", name: "1win", logoText: "1win", logoColor: "#3498db", streamers: "SilverName, Ludwig", bonusText: "500% на депозит", bonusExtra: "+ 250 FS", link: "#", terms: "1. На первые 4 депозита.\n2. Автоматический отыгрыш при ставках." }
         ];
 
         function renderProjects() {
             const listContainer = document.getElementById('projects-list');
             listContainer.innerHTML = '';
-
             projectsData.forEach((project, index) => {
                 const row = document.createElement('div');
                 row.className = 'project-row';
@@ -779,42 +380,52 @@
                     </div>
                     <div class="project-bonus">
                         <div class="bonus-label">Бонусы</div>
-                        <div class="bonus-value">${project.bonusText.split(' ')[0]} <span>${project.bonusText.substring(project.bonusText.indexOf(' '))}</span></div>
-                        <div class="bonus-fs">${project.bonusExtra}</div>
+                        <div class="bonus-value">${project.bonusText}</div>
+                        <div class="bonus-fs">${project.project-bonus ? project.bonusExtra : ''}</div>
                     </div>
                     <div class="project-action">
-                        <a href="${project.link}" target="_blank" class="btn-go">Перейти &gt;</a>
+                        <a href="${project.link}" class="btn-go">Перейти &gt;</a>
                         <span class="terms-link" onclick="openTerms(${index})">Условия бонуса</span>
                     </div>
                 `;
                 listContainer.appendChild(row);
-
-                setTimeout(() => {
-                    row.classList.add('visible');
-                }, index * 80);
+                setTimeout(() => row.classList.add('visible'), index * 80);
             });
         }
 
-        const modalOverlay = document.getElementById('modalOverlay');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalText = document.getElementById('modalText');
-        const modalClose = document.getElementById('modalClose');
+        // FAQ Логика аккордеона
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            item.classList.toggle('active');
+        }
 
+        // Общие функции модалок
         function openTerms(index) {
             const project = projectsData[index];
-            modalTitle.innerText = `Условия бонуса в ${project.name}`;
-            modalText.innerText = project.terms;
-            modalOverlay.classList.add('active');
+            document.getElementById('modalTitle').innerText = `Условия в ${project.name}`;
+            document.getElementById('modalText').innerText = project.terms;
+            document.getElementById('modalOverlay').add('active');
         }
 
-        function closeModal() {
-            modalOverlay.classList.remove('active');
+        function openSubscribeModal() { document.getElementById('subscribeModal').classList.add('active'); }
+        
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+        function handleSubscribe(e) {
+            e.preventDefault();
+            alert('Спасибо за подписку! Эксклюзивные промокоды отправлены на ваш Email.');
+            closeModal('subscribeModal');
         }
 
-        modalClose.addEventListener('click', closeModal);
-        modalOverlay.addEventListener('click', (e) => {
-            if(e.target === modalOverlay) closeModal();
-        });
+        // Логика плеера видео
+        function openVideoModal() {
+            document.getElementById('videoPlayer').src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"; // Замените на ID вашего видео
+            document.getElementById('videoModal').classList.add('active');
+        }
+        function closeVideoModal() {
+            document.getElementById('videoPlayer').src = "";
+            closeModal('videoModal');
+        }
 
         document.addEventListener('DOMContentLoaded', renderProjects);
     </script>
