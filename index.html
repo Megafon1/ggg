@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOP ZANOSI - Проекты из видео</title>
+    <!-- Подключаем современный шрифт Inter через Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
@@ -14,7 +15,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* Применяем новый шрифт ко всем элементам */
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
         }
 
@@ -113,11 +113,108 @@
             text-align: right;
         }
 
-        .hero-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 0 40px rgba(255, 183, 3, 0.08);
+        /* HTML/CSS Иллюстрация вместо битой картинки */
+        .hero-graphics-container {
+            display: inline-block;
+            width: 100%;
+            max-width: 420px;
+            height: 320px;
+            position: relative;
+            background: radial-gradient(circle at center, rgba(255, 183, 3, 0.15) 0%, transparent 70%);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .graphic-element {
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        /* Стилизованные круги, напоминающие рулетку */
+        .roulette-circle-1 {
+            width: 260px;
+            height: 260px;
+            border: 2px dashed rgba(255, 183, 3, 0.4);
+            top: 30px;
+            right: 40px;
+            animation: rotateClockwise 40s linear infinite;
+        }
+
+        .roulette-circle-2 {
+            width: 180px;
+            height: 180px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            top: 70px;
+            right: 80px;
+        }
+
+        /* Стилизованные фишки / элементы джекпота */
+        .casino-badge {
+            position: absolute;
+            background: linear-gradient(135deg, #ffb703 0%, #ff8f00 100%);
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 20px;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 25px rgba(255, 183, 3, 0.4);
+            top: 130px;
+            right: 120px;
+            transform: rotate(-5deg);
+            text-transform: uppercase;
+        }
+
+        .neon-glow-1 {
+            width: 80px;
+            height: 80px;
+            background: #ff007f;
+            filter: blur(40px);
+            top: 60px;
+            right: 220px;
+            opacity: 0.6;
+        }
+
+        .neon-glow-2 {
+            width: 100px;
+            height: 100px;
+            background: #ffb703;
+            filter: blur(50px);
+            bottom: 40px;
+            right: 60px;
+            opacity: 0.5;
+        }
+
+        .mini-card {
+            position: absolute;
+            width: 50px;
+            height: 75px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            backdrop-filter: blur(4px);
+            top: 80px;
+            right: 70px;
+            transform: rotate(15deg);
+        }
+
+        .mini-card-2 {
+            position: absolute;
+            width: 50px;
+            height: 75px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            backdrop-filter: blur(4px);
+            top: 95px;
+            right: 50px;
+            transform: rotate(30deg);
+        }
+
+        @keyframes rotateClockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .hero h1 {
@@ -501,7 +598,12 @@
             .hero, .hero-cell-text, .hero-cell-image { display: block; width: 100%; text-align: center; }
             .hero-cell-text { padding-right: 0; margin-bottom: 35px; }
             .hero-cell-image { text-align: center; }
-            .hero-image { max-width: 75%; }
+            .hero-graphics-container { max-width: 100%; height: 260px; margin-top: 10px; }
+            .roulette-circle-1 { top: 10px; right: calc(50% - 130px); }
+            .roulette-circle-2 { top: 50px; right: calc(50% - 90px); }
+            .casino-badge { top: 100px; right: calc(50% - 75px); }
+            .mini-card { top: 50px; right: calc(50% - 130px); }
+            .mini-card-2 { top: 65px; right: calc(50% - 150px); }
             .hero p { margin-left: auto; margin-right: auto; }
             .features { justify-content: center; }
         }
@@ -509,7 +611,6 @@
         @media (max-width: 550px) {
             header { flex-direction: column; gap: 15px; text-align: center; }
             nav ul { gap: 15px; }
-            .hero-image { max-width: 100%; }
             .project-row { flex-direction: column; text-align: center; gap: 18px; padding: 25px 15px; }
             .project-logo { margin-right: 0; }
             .project-bonus { padding-left: 0; }
@@ -520,6 +621,7 @@
 <body>
 
     <div class="container">
+        <!-- Шапка -->
         <header>
             <div class="logo" onclick="window.location.reload()">👑 TOP<span>ZANOSI</span></div>
             <nav>
@@ -534,12 +636,14 @@
             <a href="#" class="btn-subscribe">Подписаться</a>
         </header>
 
+        <!-- Главный баннер -->
         <section class="hero">
             <div class="hero-cell-text">
                 <span style="color: #ffb703; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">▶ ТОП-10 ЗАНОСОВ СО СТРИМОВ</span>
                 <h1 style="margin-top: 12px;">Проекты<br><span>из видео</span></h1>
                 <p>Все проекты из моих нарезок, в которых играют топовые стримеры. Регистрируйся и забирай эксклюзивные бонусы!</p>
                 
+                <!-- Преимущества -->
                 <div class="features">
                     <div class="feature-item"><strong>Проверенные</strong> проекты</div>
                     <div class="feature-item"><strong>Эксклюзивные</strong> бонусы</div>
@@ -548,18 +652,30 @@
                 </div>
             </div>
             <div class="hero-cell-image">
-                <img src="https://googleusercontent.com/image_generation_content/230" alt="Top Zanosi Иллюстрация" class="hero-image">
+                <!-- Векторная анимированная графика вместо битой картинки -->
+                <div class="hero-graphics-container">
+                    <div class="graphic-element neon-glow-1"></div>
+                    <div class="graphic-element neon-glow-2"></div>
+                    <div class="graphic-element roulette-circle-1"></div>
+                    <div class="graphic-element roulette-circle-2"></div>
+                    <div class="mini-card"></div>
+                    <div class="mini-card-2"></div>
+                    <div class="casino-badge">777 Zanos</div>
+                </div>
             </div>
         </section>
 
+        <!-- Основной контент: Список проектов -->
         <main class="projects-section">
             <div class="section-header">
                 <h2 class="section-title">Список проектов</h2>
                 <span class="section-subtitle">Нажми на проект, чтобы перейти и забрать бонус</span>
             </div>
 
+            <!-- Контейнер для динамических карточек -->
             <div id="projects-list"></div>
 
+            <!-- Инфо-блок под списком -->
             <div class="how-it-works">
                 <div class="how-text">
                     <h4>Как это работает?</h4>
@@ -569,6 +685,7 @@
             </div>
         </main>
 
+        <!-- Подвал -->
         <footer>
             <div><span class="age-limit">18+</span> Играйте ответственно</div>
             <div>Все проекты из видео на канале TOP ZANOSI</div>
@@ -576,6 +693,7 @@
         </footer>
     </div>
 
+    <!-- Структура Модального Окна (Условия бонуса) -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
@@ -584,6 +702,7 @@
         </div>
     </div>
 
+    <!-- JAVASCRIPT УПРАВЛЕНИЕ ДАННЫМИ И АНИМАЦИЕЙ -->
     <script>
         const projectsData = [
             {
@@ -672,7 +791,7 @@
 
                 setTimeout(() => {
                     row.classList.add('visible');
-                }, index * 80); // Немного ускорили появление для более динамичного эффекта
+                }, index * 80);
             });
         }
 
