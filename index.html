@@ -776,25 +776,16 @@
             .project-action { align-items: center; }
         }
     
-.secret-box{
-position:relative;height:360px;border-radius:24px;overflow:hidden;
-background:linear-gradient(145deg,#14161d,#0b0c10);
-border:1px solid rgba(255,183,3,.25);
-display:flex;flex-direction:column;justify-content:center;align-items:center;
-text-align:center;
-box-shadow:0 25px 60px rgba(0,0,0,.7), inset 0 0 80px rgba(255,183,3,.05);
-}
-.secret-glow{position:absolute;width:300px;height:300px;border-radius:50%;
-background:radial-gradient(circle,rgba(255,183,3,.25) 0%,rgba(255,183,3,.05) 45%,transparent 70%);
-animation:pulseGlow 3s infinite;}
-.secret-badge{position:relative;z-index:2;background:#ffb703;color:#000;font-size:12px;font-weight:900;padding:8px 16px;border-radius:999px;margin-bottom:20px;}
-.secret-title{position:relative;z-index:2;font-size:36px;font-weight:900;line-height:1.1;margin-bottom:12px;}
-.secret-subtitle{position:relative;z-index:2;color:#9da4b0;font-size:14px;margin-bottom:22px;}
-.secret-reward{position:relative;z-index:2;color:#ffb703;font-size:26px;font-weight:800;margin-bottom:20px;}
-.secret-timer{position:relative;z-index:2;color:#fff;font-size:15px;margin-bottom:24px;}
-.secret-btn{position:relative;z-index:2;background:#ffb703;color:#000;border:none;border-radius:10px;padding:16px 34px;font-size:15px;font-weight:800;cursor:pointer;}
-.secret-users{position:relative;z-index:2;margin-top:18px;font-size:13px;color:#8a92a6;}
-@keyframes pulseGlow{0%{transform:scale(.9);opacity:.6;}50%{transform:scale(1.1);opacity:1;}100%{transform:scale(.9);opacity:.6;}}
+.secret-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+.secret-card{pointer-events:auto;background:rgba(11,12,16,.85);backdrop-filter:blur(12px);border:1px solid rgba(255,183,3,.35);border-radius:18px;padding:24px;text-align:center;width:320px;box-shadow:0 0 40px rgba(255,183,3,.15);}
+.secret-badge{display:inline-block;background:#ffb703;color:#000;padding:6px 12px;border-radius:999px;font-size:11px;font-weight:800;margin-bottom:12px;}
+.secret-title{font-size:28px;font-weight:900;line-height:1.1;margin-bottom:10px;}
+.secret-reward{color:#ffb703;font-size:22px;font-weight:800;margin-bottom:10px;}
+.secret-btn{background:#ffb703;color:#000;border:none;padding:14px 24px;border-radius:10px;font-weight:800;cursor:pointer;animation:pulse 1.5s infinite;}
+.secret-users,.secret-timer,.secret-left{font-size:13px;color:#c0c6d0;margin-top:8px;}
+.progress{height:8px;background:#222;border-radius:99px;overflow:hidden;margin:12px 0;}
+.progress span{display:block;height:100%;width:82%;background:#ffb703;}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 
 </style>
 </head>
@@ -826,8 +817,7 @@ animation:pulseGlow 3s infinite;}
                     <div class="feature-item"><strong>Проекты</strong> из видео</div>
                 </div>
             </div>
-            
-<div class="bonus-checker">
+            <div class="bonus-checker">
 
     <div id="step1">
 
@@ -882,7 +872,6 @@ animation:pulseGlow 3s infinite;}
 
     </div>
 
-</div>
 </div>
         </section>
 
@@ -1127,24 +1116,13 @@ animation:pulseGlow 3s infinite;}
         // Инициализация при загрузке
         document.addEventListener('DOMContentLoaded', renderProjects);
     
-let hours=23,minutes=59,seconds=59;
+let h=23,m=59,s=59;
 setInterval(()=>{
-seconds--;
-if(seconds<0){seconds=59;minutes--;}
-if(minutes<0){minutes=59;hours--;}
-if(hours<0){hours=23;}
-const t=document.getElementById("promoTimer");
-if(t)t.innerText=String(hours).padStart(2,"0")+":"+String(minutes).padStart(2,"0")+":"+String(seconds).padStart(2,"0");
+s--;
+if(s<0){s=59;m--;} if(m<0){m=59;h--;} if(h<0){h=23;}
+const t=document.getElementById('promoTimer');
+if(t)t.textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 },1000);
-
-let users=247;
-setInterval(()=>{
-if(Math.random()>0.65){
-users+=Math.floor(Math.random()*3)+1;
-const c=document.getElementById("usersCounter");
-if(c)c.innerText=users;
-}
-},7000);
 
 </script>
 </body>
