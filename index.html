@@ -775,7 +775,28 @@
             .project-bonus { padding-left: 0; }
             .project-action { align-items: center; }
         }
-    </style>
+    
+.secret-box{
+position:relative;height:360px;border-radius:24px;overflow:hidden;
+background:linear-gradient(145deg,#14161d,#0b0c10);
+border:1px solid rgba(255,183,3,.25);
+display:flex;flex-direction:column;justify-content:center;align-items:center;
+text-align:center;
+box-shadow:0 25px 60px rgba(0,0,0,.7), inset 0 0 80px rgba(255,183,3,.05);
+}
+.secret-glow{position:absolute;width:300px;height:300px;border-radius:50%;
+background:radial-gradient(circle,rgba(255,183,3,.25) 0%,rgba(255,183,3,.05) 45%,transparent 70%);
+animation:pulseGlow 3s infinite;}
+.secret-badge{position:relative;z-index:2;background:#ffb703;color:#000;font-size:12px;font-weight:900;padding:8px 16px;border-radius:999px;margin-bottom:20px;}
+.secret-title{position:relative;z-index:2;font-size:36px;font-weight:900;line-height:1.1;margin-bottom:12px;}
+.secret-subtitle{position:relative;z-index:2;color:#9da4b0;font-size:14px;margin-bottom:22px;}
+.secret-reward{position:relative;z-index:2;color:#ffb703;font-size:26px;font-weight:800;margin-bottom:20px;}
+.secret-timer{position:relative;z-index:2;color:#fff;font-size:15px;margin-bottom:24px;}
+.secret-btn{position:relative;z-index:2;background:#ffb703;color:#000;border:none;border-radius:10px;padding:16px 34px;font-size:15px;font-weight:800;cursor:pointer;}
+.secret-users{position:relative;z-index:2;margin-top:18px;font-size:13px;color:#8a92a6;}
+@keyframes pulseGlow{0%{transform:scale(.9);opacity:.6;}50%{transform:scale(1.1);opacity:1;}100%{transform:scale(.9);opacity:.6;}}
+
+</style>
 </head>
 <body>
 
@@ -805,28 +826,20 @@
                     <div class="feature-item"><strong>Проекты</strong> из видео</div>
                 </div>
             </div>
-            <div class="hero-cell-image">
-                <div class="hero-theme-bg" id="parallaxContainer">
-                    <div class="parallax-scene">
-                        <div class="parallax-layer layer-bg-roulette" data-depth="10"></div>
-                        
-                        <div class="parallax-layer layer-card-1" data-depth="20">
-                            <div>♠</div>
-                            <div style="position:absolute; bottom:10px; right:10px; transform:rotate(180deg)">♠</div>
-                        </div>
-                        <div class="parallax-layer layer-card-2" data-depth="25">
-                            <div>♥</div>
-                            <div style="position:absolute; bottom:10px; right:10px; transform:rotate(180deg)">♥</div>
-                        </div>
-
-                        <div class="parallax-layer layer-dice-1" data-depth="40">🎲</div>
-                        <div class="parallax-layer layer-dice-2" data-depth="45">🎲</div>
-
-                        <div class="parallax-layer layer-chip-1" data-depth="60"></div>
-                        <div class="parallax-layer layer-chip-2" data-depth="55"></div>
-                    </div>
-                </div>
-            </div>
+            
+<div class="hero-cell-image">
+    <div class="secret-box">
+        <div class="secret-glow"></div>
+        <div class="secret-badge">🔥 СЕКРЕТНЫЙ БОНУС</div>
+        <div class="secret-title">БОНУС ИЗ<br>ПОСЛЕДНЕГО ВИДЕО</div>
+        <div class="secret-subtitle">Доступен только для подписчиков канала</div>
+        <div class="secret-reward">🎁 До 500 FS + 500%</div>
+        <div class="secret-timer">⏳ Активен ещё: <span id="promoTimer">23:59:59</span></div>
+        <button class="secret-btn" onclick="document.querySelector('#projects-list').scrollIntoView({behavior:'smooth'})">Забрать бонус →</button>
+        <div class="secret-users">👥 Уже забрали сегодня: <span id="usersCounter">247</span></div>
+    </div>
+</div>
+</div>
         </section>
 
         <main class="projects-section">
@@ -1069,6 +1082,26 @@
 
         // Инициализация при загрузке
         document.addEventListener('DOMContentLoaded', renderProjects);
-    </script>
+    
+let hours=23,minutes=59,seconds=59;
+setInterval(()=>{
+seconds--;
+if(seconds<0){seconds=59;minutes--;}
+if(minutes<0){minutes=59;hours--;}
+if(hours<0){hours=23;}
+const t=document.getElementById("promoTimer");
+if(t)t.innerText=String(hours).padStart(2,"0")+":"+String(minutes).padStart(2,"0")+":"+String(seconds).padStart(2,"0");
+},1000);
+
+let users=247;
+setInterval(()=>{
+if(Math.random()>0.65){
+users+=Math.floor(Math.random()*3)+1;
+const c=document.getElementById("usersCounter");
+if(c)c.innerText=users;
+}
+},7000);
+
+</script>
 </body>
 </html>
