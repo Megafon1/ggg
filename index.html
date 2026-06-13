@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOP ZANOSI - Проекты из видео</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
     <style>
         /* Общие стили и сброс настроек */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Применяем новый шрифт ко всем элементам */
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
         }
 
         body {
@@ -18,6 +23,8 @@
             color: #ffffff;
             line-height: 1.6;
             padding-bottom: 50px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
@@ -32,16 +39,18 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 22px;
+            font-weight: 900;
             color: #fff;
             display: flex;
             align-items: center;
             gap: 10px;
+            cursor: pointer;
+            letter-spacing: -0.5px;
         }
 
         .logo span {
@@ -58,6 +67,7 @@
             color: #aaaaaa;
             text-decoration: none;
             font-size: 14px;
+            font-weight: 500;
             transition: color 0.3s;
         }
 
@@ -68,11 +78,11 @@
         .btn-subscribe {
             border: 1px solid #ffb703;
             color: #ffb703;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 10px 22px;
+            border-radius: 6px;
             text-decoration: none;
             font-size: 14px;
-            font-weight: bold;
+            font-weight: 600;
             transition: background 0.3s, color 0.3s;
         }
 
@@ -83,17 +93,40 @@
 
         /* Главный баннер (Hero Section) */
         .hero {
-            padding: 60px 0;
-            text-align: left;
-            position: relative;
+            padding: 50px 0 70px 0;
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+        .hero-cell-text {
+            display: table-cell;
+            width: 55%;
+            vertical-align: middle;
+            padding-right: 20px;
+        }
+
+        .hero-cell-image {
+            display: table-cell;
+            width: 45%;
+            vertical-align: middle;
+            text-align: right;
+        }
+
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 40px rgba(255, 183, 3, 0.08);
         }
 
         .hero h1 {
-            font-size: 48px;
+            font-size: 52px;
             text-transform: uppercase;
-            line-height: 1.1;
-            margin-bottom: 20px;
+            line-height: 1.05;
+            margin-bottom: 22px;
             font-weight: 900;
+            letter-spacing: -1px;
         }
 
         .hero h1 span {
@@ -102,58 +135,76 @@
         }
 
         .hero p {
-            color: #cccccc;
-            max-width: 500px;
-            font-size: 16px;
+            color: #9da4b0;
+            font-size: 15px;
+            font-weight: 400;
             margin-bottom: 40px;
+            max-width: 480px;
+            line-height: 1.7;
         }
 
         /* Преимущества (Features) */
         .features {
             display: flex;
-            gap: 40px;
+            gap: 30px;
             margin-bottom: 40px;
+            flex-wrap: wrap;
         }
 
         .feature-item {
             display: flex;
             flex-direction: column;
-            gap: 5px;
-            font-size: 14px;
-            color: #aaaaaa;
-            max-width: 120px;
+            gap: 4px;
+            font-size: 13px;
+            color: #8a92a6;
+            max-width: 130px;
+            line-height: 1.4;
         }
 
         .feature-item strong {
             color: #fff;
+            font-weight: 700;
+            font-size: 14px;
         }
 
         /* Секция списка проектов */
         .projects-section {
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 16px;
+            padding: 35px;
+            position: relative;
+            z-index: 3;
         }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .section-title {
             font-size: 22px;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             border-left: 4px solid #ffb703;
-            padding-left: 10px;
+            padding-left: 12px;
         }
 
         .section-subtitle {
-            font-size: 12px;
-            color: #666666;
+            font-size: 13px;
+            color: #6c757d;
+            font-weight: 400;
+        }
+
+        /* Динамический контейнер для карточек */
+        #projects-list {
+            display: flex;
+            flex-direction: column;
         }
 
         /* Карточка проекта (Project Row) */
@@ -161,44 +212,49 @@
             display: flex;
             align-items: center;
             background: rgba(255, 255, 255, 0.01);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 15px;
-            transition: transform 0.2s, border-color 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 16px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .project-row.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s, box-shadow 0.2s;
         }
 
         .project-row:hover {
-            border-color: rgba(255, 183, 3, 0.3);
+            border-color: rgba(255, 183, 3, 0.25);
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
         .project-number {
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 16px;
+            font-weight: 700;
             color: #ffb703;
             width: 40px;
+            font-variant-numeric: tabular-nums;
         }
 
         .project-logo {
             width: 140px;
             height: 60px;
             background: #14161d;
-            border-radius: 8px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            font-weight: 900;
             font-size: 18px;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             margin-right: 25px;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.04);
         }
-
-        /* Цвета для брендов (примеры) */
-        .logo-gama { color: #ff007f; }
-        .logo-r7 { color: #f4d03f; }
-        .logo-1win { color: #3498db; }
 
         .project-info {
             flex: 1;
@@ -206,25 +262,28 @@
 
         .project-name {
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 700;
             margin-bottom: 5px;
+            letter-spacing: -0.3px;
         }
 
         .project-streamers {
-            font-size: 12px;
-            color: #777777;
-            margin-bottom: 8px;
+            font-size: 13px;
+            color: #6c757d;
+            margin-bottom: 10px;
+            font-weight: 400;
         }
 
         .tag-video {
             display: inline-block;
             font-size: 10px;
-            background: rgba(155, 89, 182, 0.2);
-            color: #9b59b6;
-            padding: 2px 8px;
-            border-radius: 4px;
+            background: rgba(179, 112, 214, 0.12);
+            color: #c58ee2;
+            padding: 3px 10px;
+            border-radius: 6px;
             text-transform: uppercase;
-            font-weight: bold;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .project-bonus {
@@ -237,86 +296,103 @@
             color: #ffb703;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 2px;
+            font-weight: 700;
+            margin-bottom: 4px;
         }
 
         .bonus-value {
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 19px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
         }
 
         .bonus-value span {
-            color: #aaaaaa;
+            color: #8a92a6;
             font-size: 14px;
-            font-weight: normal;
+            font-weight: 400;
+        }
+
+        .bonus-fs {
+            font-size: 15px; 
+            color: #ffb703;
+            font-weight: 700;
+            margin-top: 2px;
         }
 
         .project-action {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 8px;
+            gap: 10px;
         }
 
         .btn-go {
             background: transparent;
             border: 1px solid #ffb703;
             color: #ffb703;
-            padding: 12px 30px;
-            border-radius: 6px;
+            padding: 12px 32px;
+            border-radius: 8px;
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 700;
             font-size: 14px;
-            transition: background 0.3s, color 0.3s;
+            transition: background 0.3s, color 0.3s, box-shadow 0.3s;
         }
 
         .btn-go:hover {
             background: #ffb703;
             color: #000;
+            box-shadow: 0 0 20px rgba(255, 183, 3, 0.3);
         }
 
         .terms-link {
-            font-size: 11px;
-            color: #555555;
+            font-size: 12px;
+            color: #495057;
             text-decoration: underline;
             cursor: pointer;
+            font-weight: 500;
+            transition: color 0.2s;
         }
 
         .terms-link:hover {
-            color: #888888;
+            color: #ffb703;
         }
 
         /* Информационный блок снизу (Как это работает) */
         .how-it-works {
-            margin-top: 25px;
-            background: rgba(255, 183, 3, 0.03);
-            border: 1px dashed rgba(255, 183, 3, 0.2);
-            border-radius: 10px;
-            padding: 20px;
+            margin-top: 30px;
+            background: rgba(255, 183, 3, 0.02);
+            border: 1px dashed rgba(255, 183, 3, 0.15);
+            border-radius: 12px;
+            padding: 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .how-text h4 {
             color: #ffb703;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             font-size: 16px;
+            font-weight: 700;
         }
 
         .how-text p {
             font-size: 13px;
-            color: #aaaaaa;
+            color: #8a92a6;
+            font-weight: 400;
         }
 
         .btn-watch {
             background: #14161d;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.08);
             color: #fff;
-            padding: 10px 20px;
-            border-radius: 6px;
+            padding: 12px 24px;
+            border-radius: 8px;
             text-decoration: none;
             font-size: 13px;
+            font-weight: 600;
             transition: background 0.3s;
         }
 
@@ -324,23 +400,120 @@
             background: #1c1f2a;
         }
 
+        /* Стили для Модального Окна (Popup) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(6px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #14161d;
+            border: 1px solid rgba(255, 183, 3, 0.2);
+            padding: 35px;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: #555;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffb703;
+            margin-bottom: 18px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .modal-text {
+            font-size: 14px;
+            color: #adb5bd;
+            white-space: pre-line;
+            line-height: 1.6;
+        }
+
         /* Подвал сайта (Footer) */
         footer {
-            margin-top: 40px;
+            margin-top: 45px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 12px;
-            color: #555555;
+            color: #495057;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 20px;
+            padding-top: 25px;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-weight: 500;
         }
 
         .age-limit {
-            border: 1px solid #555555;
-            padding: 2px 5px;
-            border-radius: 3px;
+            border: 1px solid #495057;
+            padding: 2px 6px;
+            border-radius: 4px;
             margin-right: 10px;
+            font-weight: 700;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 850px) {
+            .hero, .hero-cell-text, .hero-cell-image { display: block; width: 100%; text-align: center; }
+            .hero-cell-text { padding-right: 0; margin-bottom: 35px; }
+            .hero-cell-image { text-align: center; }
+            .hero-image { max-width: 75%; }
+            .hero p { margin-left: auto; margin-right: auto; }
+            .features { justify-content: center; }
+        }
+
+        @media (max-width: 550px) {
+            header { flex-direction: column; gap: 15px; text-align: center; }
+            nav ul { gap: 15px; }
+            .hero-image { max-width: 100%; }
+            .project-row { flex-direction: column; text-align: center; gap: 18px; padding: 25px 15px; }
+            .project-logo { margin-right: 0; }
+            .project-bonus { padding-left: 0; }
+            .project-action { align-items: center; }
         }
     </style>
 </head>
@@ -348,7 +521,7 @@
 
     <div class="container">
         <header>
-            <div class="logo">👑 TOP<span>ZANOSI</span></div>
+            <div class="logo" onclick="window.location.reload()">👑 TOP<span>ZANOSI</span></div>
             <nav>
                 <ul>
                     <li><a href="#">Проекты</a></li>
@@ -362,25 +535,20 @@
         </header>
 
         <section class="hero">
-            <div style="max-width: 600px;">
-                <span style="color: #ffb703; font-size: 12px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase;">▶ ТОП-10 ЗАНОСОВ СО СТРИМОВ</span>
-                <h1 style="margin-top: 10px;">Проекты<br><span>из видео</span></h1>
+            <div class="hero-cell-text">
+                <span style="color: #ffb703; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;">▶ ТОП-10 ЗАНОСОВ СО СТРИМОВ</span>
+                <h1 style="margin-top: 12px;">Проекты<br><span>из видео</span></h1>
                 <p>Все проекты из моих нарезок, в которых играют топовые стримеры. Регистрируйся и забирай эксклюзивные бонусы!</p>
                 
                 <div class="features">
-                    <div class="feature-item">
-                        <strong>Проверенные</strong> проекты
-                    </div>
-                    <div class="feature-item">
-                        <strong>Эксклюзивные</strong> бонусы
-                    </div>
-                    <div class="feature-item">
-                        <strong>Топовые</strong> стримеры
-                    </div>
-                    <div class="feature-item">
-                        <strong>Проекты</strong> из видео
-                    </div>
+                    <div class="feature-item"><strong>Проверенные</strong> проекты</div>
+                    <div class="feature-item"><strong>Эксклюзивные</strong> бонусы</div>
+                    <div class="feature-item"><strong>Топовые</strong> стримеры</div>
+                    <div class="feature-item"><strong>Проекты</strong> из видео</div>
                 </div>
+            </div>
+            <div class="hero-cell-image">
+                <img src="https://googleusercontent.com/image_generation_content/230" alt="Top Zanosi Иллюстрация" class="hero-image">
             </div>
         </section>
 
@@ -390,62 +558,7 @@
                 <span class="section-subtitle">Нажми на проект, чтобы перейти и забрать бонус</span>
             </div>
 
-            <div class="project-row">
-                <div class="project-number">01</div>
-                <div class="project-logo logo-gama">GAMA</div>
-                <div class="project-info">
-                    <div class="project-name">Gama Casino</div>
-                    <div class="project-streamers">Стримеры: Zubarefff, Bratishkinoff, Zernovka</div>
-                    <span class="tag-video">из видео</span>
-                </div>
-                <div class="project-bonus">
-                    <div class="bonus-label">Бонусы</div>
-                    <div class="bonus-value">100% <span>на депозит</span></div>
-                    <div class="bonus-value" style="font-size: 15px; color: #ffb703;">+ 100 FS</div>
-                </div>
-                <div class="project-action">
-                    <a href="#" class="btn-go">Перейти &gt;</a>
-                    <span class="terms-link">Условия бонуса</span>
-                </div>
-            </div>
-
-            <div class="project-row">
-                <div class="project-number">02</div>
-                <div class="project-logo logo-r7">R7</div>
-                <div class="project-info">
-                    <div class="project-name">R7 Casino</div>
-                    <div class="project-streamers">Стримеры: xQc, Drakesoul, Maks</div>
-                    <span class="tag-video">из видео</span>
-                </div>
-                <div class="project-bonus">
-                    <div class="bonus-label">Бонусы</div>
-                    <div class="bonus-value">200% <span>на депозит</span></div>
-                    <div class="bonus-value" style="font-size: 15px; color: #ffb703;">+ 100 FS</div>
-                </div>
-                <div class="project-action">
-                    <a href="#" class="btn-go">Перейти &gt;</a>
-                    <span class="terms-link">Условия бонуса</span>
-                </div>
-            </div>
-
-            <div class="project-row">
-                <div class="project-number">03</div>
-                <div class="project-logo logo-1win">1win</div>
-                <div class="project-info">
-                    <div class="project-name">1win</div>
-                    <div class="project-streamers">Стримеры: TTR, Ludojop, Shamil</div>
-                    <span class="tag-video">из видео</span>
-                </div>
-                <div class="project-bonus">
-                    <div class="bonus-label">Бонусы</div>
-                    <div class="bonus-value">500% <span>на депозит</span></div>
-                    <div class="bonus-value" style="font-size: 15px; color: #ffb703;">+ 250 FS</div>
-                </div>
-                <div class="project-action">
-                    <a href="#" class="btn-go">Перейти &gt;</a>
-                    <span class="terms-link">Условия бонуса</span>
-                </div>
-            </div>
+            <div id="projects-list"></div>
 
             <div class="how-it-works">
                 <div class="how-text">
@@ -457,13 +570,134 @@
         </main>
 
         <footer>
-            <div>
-                <span class="age-limit">18+</span> Играйте ответственно
-            </div>
+            <div><span class="age-limit">18+</span> Играйте ответственно</div>
             <div>Все проекты из видео на канале TOP ZANOSI</div>
             <div>🔄 Обновление списка каждые 7 дней</div>
         </footer>
     </div>
 
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <h3 class="modal-title" id="modalTitle">Условия бонуса</h3>
+            <p class="modal-text" id="modalText">Текст условий...</p>
+        </div>
+    </div>
+
+    <script>
+        const projectsData = [
+            {
+                id: "01",
+                name: "Gama Casino",
+                logoText: "GAMA",
+                logoColor: "#ff007f",
+                streamers: "Zubarefff, Bratishkinoff, Zernovka",
+                bonusText: "100% на депозит",
+                bonusExtra: "+ 100 FS",
+                link: "https://example.com/gama",
+                terms: "1. Бонус доступен только для новых игроков.\n2. Вейджер на бонус составляет х45.\n3. Минимальный депозит для активации — 1000 руб.\n4. Фриспины начисляются частями в течение 24 часов."
+            },
+            {
+                id: "02",
+                name: "R7 Casino",
+                logoText: "R7",
+                logoColor: "#f4d03f",
+                streamers: "xQc, Drakesoul, Maks",
+                bonusText: "200% на депозит",
+                bonusExtra: "+ 100 FS",
+                link: "https://example.com/r7",
+                terms: "1. Максимальный размер бонуса — 50 000 руб.\n2. Вейджер на денежную часть х40, на фриспины х35.\n3. Требуется обязательная верификация аккаунта для вывода."
+            },
+            {
+                id: "03",
+                name: "1win",
+                logoText: "1win",
+                logoColor: "#3498db",
+                streamers: "Dosaia, SilverName, Ludwig",
+                bonusText: "500% на депозит",
+                bonusExtra: "+ 250 FS",
+                link: "https://example.com/1win",
+                terms: "1. Бонус распределяется на первые 4 депозита.\n2. +200% на первый, +150% на второй, +100% на третий и +50% на четвертый.\n3. Отыгрыш происходит автоматически при проигрышных ставках."
+            },
+            {
+                id: "04",
+                name: "Azino 777",
+                logoText: "AZINO 777",
+                logoColor: "#e74c3c",
+                streamers: "Evelone192, Vladizub, Buster",
+                bonusText: "150 FS без депозита",
+                bonusExtra: "+ 100% на депозит",
+                link: "https://example.com/azino",
+                terms: "1. Бездепозитные фриспины выдаются за подтверждение номера мобильного телефона.\n2. Максимальный вывод с бездепозитного бонуса ограничен суммой в 5 000 руб.\n3. На первый депозит установлен вейджер х30."
+            },
+            {
+                id: "05",
+                name: "Kent Casino",
+                logoText: "KENT",
+                logoColor: "#1abc9c",
+                streamers: "Buster, Leva2k, Follentass",
+                bonusText: "100% на депозит",
+                bonusExtra: "+ 50 FS",
+                link: "https://example.com/kent",
+                terms: "1. Минимальный депозит для активации предложения — 500 руб.\n2. Срок действия бонуса составляет 7 дней с момента активации.\n3. Стандартный вейджер х40 на сумму бонуса."
+            }
+        ];
+
+        function renderProjects() {
+            const listContainer = document.getElementById('projects-list');
+            listContainer.innerHTML = '';
+
+            projectsData.forEach((project, index) => {
+                const row = document.createElement('div');
+                row.className = 'project-row';
+                row.innerHTML = `
+                    <div class="project-number">${project.id}</div>
+                    <div class="project-logo" style="color: ${project.logoColor};">${project.logoText}</div>
+                    <div class="project-info">
+                        <div class="project-name">${project.name}</div>
+                        <div class="project-streamers">Стримеры: ${project.streamers}</div>
+                        <span class="tag-video">из видео</span>
+                    </div>
+                    <div class="project-bonus">
+                        <div class="bonus-label">Бонусы</div>
+                        <div class="bonus-value">${project.bonusText.split(' ')[0]} <span>${project.bonusText.substring(project.bonusText.indexOf(' '))}</span></div>
+                        <div class="bonus-fs">${project.bonusExtra}</div>
+                    </div>
+                    <div class="project-action">
+                        <a href="${project.link}" target="_blank" class="btn-go">Перейти &gt;</a>
+                        <span class="terms-link" onclick="openTerms(${index})">Условия бонуса</span>
+                    </div>
+                `;
+                listContainer.appendChild(row);
+
+                setTimeout(() => {
+                    row.classList.add('visible');
+                }, index * 80); // Немного ускорили появление для более динамичного эффекта
+            });
+        }
+
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalText = document.getElementById('modalText');
+        const modalClose = document.getElementById('modalClose');
+
+        function openTerms(index) {
+            const project = projectsData[index];
+            modalTitle.innerText = `Условия бонуса в ${project.name}`;
+            modalText.innerText = project.terms;
+            modalOverlay.classList.add('active');
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if(e.target === modalOverlay) closeModal();
+        });
+
+        document.addEventListener('DOMContentLoaded', renderProjects);
+    </script>
 </body>
 </html>
