@@ -1035,31 +1035,33 @@
             const email = emailInput.value.trim();
             const submitBtn = event.target.querySelector('button');
         
-            // 1. Защита: Валидация Email (Базовая)
+            // Валидация и санитайзинг
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('Введите корректный email-адрес.');
-                return;
-            }
-        
-            // 2. Защита от XSS: Экранирование спецсимволов
-            const sanitize = (str) => str.replace(/[&<>"']/g, (m) => ({
-                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
-            }[m]));
-            const safeEmail = sanitize(email);
-        
-            // 3. Сбор IP-адреса через сервис (ipify)
-            let ip = "Не определен";
-            try {
-                const ipResponse = await fetch('https://geo.ipify.org/api/v2/country,city?apiKey=at_O91myxWklkAFtbBREHzMKhDek28Rw&ipAddress=8.8.8.8');
-                const ipData = await ipResponse.json();
-                ip = ipData.ip;
-            } catch (e) {
-                console.error("Не удалось получить IP");
-            }
+            if (!emailRegex.test(email)) { alert('Введите корректный email.'); return; }
+            
+            const sanitize = (str) => str.replace(/[&<>"']/g, (m) => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'}[m]));
         
             submitBtn.disabled = true;
             submitBtn.textContent = 'Отправка...';
+        
+            // Собираем данные
+            let geo = "Не определено";
+            let ip = "Не определен";
+            try {
+                const ipRes = await fetch('https://geo.ipify.org/api/v2/country,city?apiKey=at_O91myxWklkAFtbBREHzMKhDek28Rw&ipAddress=8.8.8.8');
+                const ipData = await ipRes.json();
+                ip = ipData.query;
+                geo = `${ipData.country}, ${ipData.city}`;
+            } catch (e) { console.error("Ошибка гео-сервиса"); }
+        
+            const userData = {
+                email: sanitize(email),
+                ip: ip,
+                geo: geo,
+                referrer: document.referrer || "direct",
+                page: window.location.href,
+                userAgent: navigator.userAgent
+            };
         
             const scriptURL = 'https://script.google.com/macros/s/AKfycbyNPN0a6VA_W_-x9IZRgkjxYAXoBYiIdtfAPr2_ueiMcpYv3NpjL6uvoLsTEsyBNzDR/exec';
         
@@ -1068,14 +1070,11 @@
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: safeEmail, ip: ip })
+                    body: JSON.stringify(userData)
                 });
-        
-                alert('Спасибо! Ваш email успешно добавлен в рассылку.');
+                alert('Спасибо! Данные сохранены.');
                 emailInput.value = '';
-            } catch (error) {
-                alert('Ошибка соединения с сервером.');
-            } finally {
+            } catch (error) { alert('Ошибка отправки.'); } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Получать бонусы';
                 closeSubscribeModal();
