@@ -801,7 +801,7 @@
                     <li><a href="#faq">FAQ</a></li>
                 </ul>
             </nav>
-            <button class="btn-subscribe" onclick="openSubscribeModal()">Подписаться</button>
+            <button class="btn-subscribe" onclick="openSubscribeModal()">Получить секретные промокоды</button>
         </header>
 
         <section class="hero">
@@ -878,7 +878,7 @@
 
         <footer>
             <div><span class="age-limit">18+</span> Играйте ответственно</div>
-            <div>Все проекты из видео на канале Заносы Недели</div>
+            <div>Все проекты из видео на канале "Заносы Недели"</div>
             <div>🔄 Обновление списка каждые 7 дней</div>
         </footer>
     </div>
@@ -895,7 +895,7 @@
         <div class="modal-content">
             <button class="modal-close" onclick="closeSubscribeModal()">&times;</button>
             <h3 class="modal-title">Закрытая рассылка бонусов</h3>
-            <p class="modal-text" style="margin-bottom: 10px;">Оставьте ваш Email, чтобы первыми получать самые свежие бездепозитные промокоды и уязвимости, которых нет в открытом доступе.</p>
+            <p class="modal-text" style="margin-bottom: 10px;">Оставьте ваш Email, чтобы первыми получать самые свежие бездепозитные промокоды и бонусы, которых нет в открытом доступе.</p>
             <form class="subscribe-form" onsubmit="handleSubscribe(event)">
                 <input type="email" placeholder="Введите ваш Email" class="subscribe-input" required>
                 <button type="submit" class="btn-submit">Получать бонусы</button>
@@ -960,7 +960,7 @@
             localStorage.setItem('subscribed_emails', JSON.stringify(savedEmails));
         
             // 6. Уведомление пользователя и очистка интерфейса
-            alert(`Спасибо за подписку! Эксклюзивные промокоды быдут отправляться на: ${emailValue}`);
+            alert(`Спасибо за подписку! Эксклюзивные промокоды и бонусы будут отправляться на: ${emailValue}`);
             emailInput.value = '';
             closeSubscribeModal();
         }
@@ -1083,14 +1083,14 @@
         function handleSubscribe(event) {
             event.preventDefault();
             const emailInput = event.target.querySelector('.subscribe-input');
-            alert(`Спасибо за подписку! Эксклюзивные промокоды отправлены на: ${emailInput.value}`);
+            alert(`Спасибо за подписку! Эксклюзивные промокоды и бонусы будут отправляться на: ${emailInput.value}`);
             emailInput.value = '';
             closeSubscribeModal();
         }
 
         // Видеоплеер
         function openVideoModal() {
-            const videoId = "dQw4w9WgXcQ"; // Замените на ID вашего видео на YouTube
+            const videoId = "tU9lvwzJxIE"; // Замените на ID вашего видео на YouTube
             document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
             document.getElementById('videoModal').classList.add('active');
         }
