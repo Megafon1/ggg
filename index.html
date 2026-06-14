@@ -1035,7 +1035,7 @@
             const email = emailInput.value.trim();
             const submitBtn = event.target.querySelector('button');
         
-            // Валидация и санитайзинг
+            // Валидация и защита от XSS
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) { alert('Введите корректный email.'); return; }
             
@@ -1044,26 +1044,15 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'Отправка...';
         
-            // Собираем данные
-            let geo = "Не определено";
-            let ip = "Не определен";
-            try {
-                const ipRes = await fetch('https://geo.ipify.org/api/v2/country,city?apiKey=at_O91myxWklkAFtbBREHzMKhDek28Rw&ipAddress=8.8.8.8');
-                const ipData = await ipRes.json();
-                ip = ipData.query;
-                geo = `${ipData.country}, ${ipData.city}`;
-            } catch (e) { console.error("Ошибка гео-сервиса"); }
-        
+            // Собираем данные без определения IP
             const userData = {
                 email: sanitize(email),
-                ip: ip,
-                geo: geo,
                 referrer: document.referrer || "direct",
                 page: window.location.href,
                 userAgent: navigator.userAgent
             };
         
-            const scriptURL = 'https://script.google.com/macros/library/d/1Nc9xWO5VZAY6GbNhRxer720uZVkcbXkVDMaCWSUpaNJncDEF6mAEPYlq/1';
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyNPN0a6VA_W_-x9IZRgkjxYAXoBYiIdtfAPr2_ueiMcpYv3NpjL6uvoLsTEsyBNzDR/exec';
         
             try {
                 await fetch(scriptURL, {
@@ -1072,7 +1061,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(userData)
                 });
-                alert('Спасибо! Данные сохранены.');
+                alert('Спасибо! Ваш Email сохранен.');
                 emailInput.value = '';
             } catch (error) { alert('Ошибка отправки.'); } finally {
                 submitBtn.disabled = false;
