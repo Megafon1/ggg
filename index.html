@@ -810,35 +810,8 @@
                 <h1 style="margin-top: 12px;">Проекты<br><span>из видео</span></h1>
                 <p>Все проекты из моих нарезок, в которых играют топовые стримеры. Регистрируйся и забирай эксклюзивные бонусы!</p>
                 
-                <div class="features">
-                    <div class="feature-item"><strong>Проверенные</strong> проекты</div>
-                    <div class="feature-item"><strong>Эксклюзивные</strong> бонусы</div>
-                    <div class="feature-item"><strong>Топовые</strong> стримеры</div>
-                    <div class="feature-item"><strong>Проекты</strong> из видео</div>
-                </div>
             </div>
-            <div class="hero-cell-image">
-                <div class="hero-theme-bg" id="parallaxContainer">
-                    <div class="parallax-scene">
-                        <div class="parallax-layer layer-bg-roulette" data-depth="10"></div>
-                        
-                        <div class="parallax-layer layer-card-1" data-depth="20">
-                            <div>♠</div>
-                            <div style="position:absolute; bottom:10px; right:10px; transform:rotate(180deg)">♠</div>
-                        </div>
-                        <div class="parallax-layer layer-card-2" data-depth="25">
-                            <div>♥</div>
-                            <div style="position:absolute; bottom:10px; right:10px; transform:rotate(180deg)">♥</div>
-                        </div>
-
-                        <div class="parallax-layer layer-dice-1" data-depth="40">🎲</div>
-                        <div class="parallax-layer layer-dice-2" data-depth="45">🎲</div>
-
-                        <div class="parallax-layer layer-chip-1" data-depth="60"></div>
-                        <div class="parallax-layer layer-chip-2" data-depth="55"></div>
-                    </div>
-                </div>
-            </div>
+            
         </section>
 
         <main class="projects-section">
@@ -1073,7 +1046,7 @@
         // Видеоплеер
         function openVideoModal() {
             const videoId = "tU9lvwzJxIE"; // Замените на ID вашего видео на YouTube
-            document.getElementById('videoPlayer').src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            document.getElementById('videoPlayer').src = `https://www.youtube.com/${videoId}?autoplay=1`;
             document.getElementById('videoModal').classList.add('active');
         }
 
@@ -1087,35 +1060,6 @@
         });
         document.getElementById('videoModal').addEventListener('click', (e) => {
             if(e.target === document.getElementById('videoModal')) closeVideoModal();
-        });
-
-        // СКРИПТ 3D ПАРАЛЛАКСА (Обработка мыши)
-        const container = document.getElementById('parallaxContainer');
-        const layers = container.querySelectorAll('.parallax-layer');
-
-        document.addEventListener('mousemove', (e) => {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            
-            // Вычисляем смещение курсора относительно центра экрана (от -0.5 до 0.5)
-            const mouseX = (e.clientX / width) - 0.5;
-            const mouseY = (e.clientY / height) - 0.5;
-
-            layers.forEach(layer => {
-                const depth = layer.getAttribute('data-depth');
-                // Рассчитываем сдвиг по осям X и Y индивидуально для глубины каждого слоя
-                const moveX = mouseX * depth;
-                const moveY = mouseY * depth;
-                
-                layer.style.transform = `translate3d(${moveX}px, ${moveY}px, 0px)`;
-            });
-        });
-
-        // Возврат элементов в исходную точку, если мышь покинула окно документа
-        document.addEventListener('mouseleave', () => {
-            layers.forEach(layer => {
-                layer.style.transform = `translate3d(0px, 0px, 0px)`;
-            });
         });
 
         // Инициализация при загрузке
