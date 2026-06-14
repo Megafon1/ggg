@@ -913,58 +913,7 @@
     </div>
 
     <script>
-
-        // Подписка с сохранением данных в локальную БД (localStorage)
-        function openSubscribeModal() {
-            document.getElementById('subscribeModal').classList.add('active');
-        }
-        
-        function closeSubscribeModal() {
-            document.getElementById('subscribeModal').classList.remove('active');
-        }
-        
-        function handleSubscribe(event) {
-            event.preventDefault();
-            
-            const emailInput = event.target.querySelector('.subscribe-input');
-            const emailValue = emailInput.value.trim();
-        
-            // 1. Простая валидация регулярным выражением
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(emailValue)) {
-                alert('Пожалуйста, введите корректный email-адрес.');
-                return;
-            }
-        
-            // 2. Извлекаем текущую базу данных из localStorage (если её нет — создаем пустой массив)
-            const savedEmails = JSON.parse(localStorage.getItem('subscribed_emails') || '[]');
-        
-            // 3. Проверяем, нет ли такого email уже в базе, чтобы избежать дубликатов
-            const isDuplicate = savedEmails.some(item => item.email.toLowerCase() === emailValue.toLowerCase());
-            
-            if (isDuplicate) {
-                alert('Этот email-адрес уже подписан на закрытую рассылку бонусов!');
-                emailInput.value = '';
-                closeSubscribeModal();
-                return;
-            }
-        
-            // 4. Формируем объект с данными подписчика
-            const newSubscriber = {
-                email: emailValue,
-                date: new Date().toISOString() // Сохраняем дату и время подписки
-            };
-        
-            // 5. Добавляем в массив и сохраняем обратно в localStorage
-            savedEmails.push(newSubscriber);
-            localStorage.setItem('subscribed_emails', JSON.stringify(savedEmails));
-        
-            // 6. Уведомление пользователя и очистка интерфейса
-            alert(`Спасибо за подписку! Эксклюзивные промокоды и бонусы будут отправляться на: ${emailValue}`);
-            emailInput.value = '';
-            closeSubscribeModal();
-        }
-        
+  
         // Слушатель закрытия модального окна по клику на оверлей
         document.getElementById('subscribeModal').addEventListener('click', (e) => {
             if(e.target === document.getElementById('subscribeModal')) closeSubscribeModal();
@@ -1080,12 +1029,37 @@
             document.getElementById('subscribeModal').classList.remove('active');
         }
 
-        function handleSubscribe(event) {
+        async function handleSubscribe(event) {
             event.preventDefault();
             const emailInput = event.target.querySelector('.subscribe-input');
-            alert(`Спасибо за подписку! Эксклюзивные промокоды и бонусы будут отправляться на: ${emailInput.value}`);
-            emailInput.value = '';
-            closeSubscribeModal();
+            const email = emailInput.value.trim();
+            const submitBtn = event.target.querySelector('button');
+        
+            if (!email) return;
+        
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Отправка...';
+        
+            // ВСТАВЬТЕ СЮДА ВАШ URL, КОТОРЫЙ ВЫ ПОЛУЧИЛИ В GOOGLE SCRIPT
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyNPN0a6VA_W_-x9IZRgkjxYAXoBYiIdtfAPr2_ueiMcpYv3NpjL6uvoLsTEsyBNzDR/exec';
+        
+            try {
+                await fetch(scriptURL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Важно для работы с Google Sheets
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email })
+                });
+        
+                alert('Спасибо! Ваш email успешно сохранен.');
+                emailInput.value = '';
+            } catch (error) {
+                alert('Ошибка при отправке. Попробуйте позже.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Получать бонусы';
+                closeSubscribeModal();
+            }
         }
 
         // Видеоплеер
