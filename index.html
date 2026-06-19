@@ -505,6 +505,40 @@
             color: #ffb703;
         }
 
+        /* Стили для таблицы условий в модальном окне */
+        .terms-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        .terms-table tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .terms-table tr:last-child {
+            border-bottom: none; /* Убираем нижнюю линию у последней строки */
+        }
+        
+        .terms-table td {
+            padding: 12px 8px;
+            vertical-align: top;
+        }
+        
+        /* Левая колонка — названия параметров */
+        .terms-table td:first-child {
+            font-weight: 700;
+            color: #ffffff;
+            width: 45%; /* Распределяем ширину */
+        }
+        
+        /* Правая колонка — значения параметров */
+        .terms-table td:last-child {
+            color: #adb5bd;
+            text-align: right; /* Выравнивание текста по правому краю, как на скрине */
+        }
+
         /* Информационный блок снизу */
         .how-it-works {
             margin-top: 30px;
@@ -866,7 +900,7 @@
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
-            <h3 class="modal-title" id="modalTitle">Финансовая информация</h3>
+            <h3 class="modal-title" id="modalTitle">Условия и лимиты</h3>
             <p class="modal-text" id="modalText">Текст условий...</p>
         </div>
     </div>
@@ -981,7 +1015,7 @@
                     <div style="display: contents;">
                         <div class="project-action">
                             <a href="${project.link}" target="_blank" class="btn-go">Перейти &gt;</a>
-                            <span class="terms-link" onclick="openTerms(${index})">Финансовая информация</span>
+                            <span class="terms-link" onclick="openTerms(${index})">Условия и лимиты</span>
                         </div>
                     </div>
                 `;
@@ -1001,8 +1035,33 @@
 
         function openTerms(index) {
             const project = projectsData[index];
-            modalTitle.innerText = `Финансовая информация для ${project.name}`;
-            modalText.innerText = project.terms;
+            const modalTitle = document.getElementById('modalTitle');
+            const modalText = document.getElementById('modalText');
+            const modalOverlay = document.getElementById('modalOverlay');
+        
+            modalTitle.textContent = `Условия и лимиты в ${project.name}`;
+            
+            // Проверяем, является ли terms массивом (для таблицы)
+            if (Array.isArray(project.terms)) {
+                let tableHtml = '<table class="terms-table">';
+                
+                project.terms.forEach(item => {
+                    tableHtml += `
+                        <tr>
+                            <td>${item.label}</td>
+                            <td>${item.value}</td>
+                        </tr>
+                    `;
+                });
+                
+                tableHtml += '</table>';
+                modalText.innerHTML = tableHtml; // Вставляем сгенерированную таблицу
+            } else {
+                // Запасной вариант, если где-то остался старый текстовый формат
+                modalText.innerHTML = `<div style="white-space: pre-line;">${project.terms}</div>`;
+            }
+        
+            // Открываем модальное окно
             modalOverlay.classList.add('active');
         }
 
