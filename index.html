@@ -417,13 +417,6 @@
             letter-spacing: -0.3px;
         }
 
-        .project-streamers {
-            font-size: 13px;
-            color: #6c757d;
-            margin-bottom: 10px;
-            font-weight: 400;
-        }
-
         .tag-video {
             display: inline-block;
             font-size: 10px;
@@ -906,26 +899,34 @@
 
             {
                 id: "01",
+                name: "APEX",
+                logoText: "APEX",
+                logoColor: "#ffffff",
+                bonusText: "225% на депозит",
+                bonusExtra: "+ 900 FS",
+                link: "https://apx3-smart.com/ad3hsmd8fa",
+                terms: "1. Бонус распределяется на первые 3 депозита.\n2. 100% + 400 FS на первый, 75% + 200 FS на второй, 50% + 300 FS на третий."
+            },
+            {
+                id: "02",
                 name: "VAVADA",
                 logoText: "VAVADA",
                 logoColor: "#ff2400",
-                streamers: "Lord Treputin, Danludan, Rezak, Mellstroy, Зубарев",
                 bonusText: "100% на депозит",
                 bonusExtra: "+ 100 FS",
                 link: "https://vvvcasinovada.com/?promo=0286eab2-3e91-4415-9c24-a57b6285c6cd&target=register",
                 terms: "1. Максимальный размер бонуса — 1000$\n2. Вейджер х35."
             },
             {
-                id: "02",
+                id: "03",
                 name: "1win",
                 logoText: "1win",
                 logoColor: "#3498db",
-                streamers: "NeLudic, SilverName, Ludwig, Папич, Evelone",
                 bonusText: "500% на депозит",
                 bonusExtra: "+ 250 FS",
                 link: "https://lkmb.cc/b3ffc504",
                 terms: "1. Бонус распределяется на первые 4 депозита.\n2. +200% на первый, +150% на второй, +100% на третий и +50% на четвертый."
-            },
+            }
         ];
 
         // Функция динамического вывода проектов
@@ -941,7 +942,6 @@
                     <div class="project-logo" style="color: ${project.logoColor};">${project.logoText}</div>
                     <div class="project-info">
                         <div class="project-name">${project.name}</div>
-                        <div class="project-streamers">Стримеры: ${project.streamers}</div>
                         <span class="tag-video">Промокод: 3DDD</span>
                     </div>
                     <div class="project-bonus">
