@@ -866,7 +866,7 @@
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
             <button class="modal-close" id="modalClose">&times;</button>
-            <h3 class="modal-title" id="modalTitle">Подробнее о проекте</h3>
+            <h3 class="modal-title" id="modalTitle">Финансовая информация</h3>
             <p class="modal-text" id="modalText">Текст условий...</p>
         </div>
     </div>
@@ -927,7 +927,16 @@
                 bonusText: "100% на депозит",
                 bonusExtra: "+ 100 FS",
                 link: "https://vvvcasinovada.com/?promo=0286eab2-3e91-4415-9c24-a57b6285c6cd&target=register",
-                terms: "Vavada - давно присутствующий на рынке бренд со слотами, live-казино и регулярными турнирными активностями. Для мобильной игры доступна полноценная браузерная версия, которую удобно запускать без установки приложения. Подойдёт пользователям, которым интересны турниры и знакомая структура казино с большим выбором игр."
+                terms: [
+                            { label: "Мин. депозит:", value: "50 RUB" },
+                            { label: "Мин. сумма вывода:", value: "1000 RUB" },
+                            { label: "Валюта счета:", value: "RUB, USD, EUR, RON, KRW, UZS, AZN, BYN, INR, KZT, UAH, MXN, BRL, TRY, HUF, PLN, JPY, CAD, AUD, SEK, NOK" },
+                            { label: "Лимит на вывод средств:", value: "745 900 в день" },
+                            { label: "Ограничение за транзакцию:", value: "Без ограничений" },
+                            { label: "Способы пополнения:", value: "Мир, СБП, Visa, Mastercard, Tether, Bitcoin, Ethereum, Ripple, Litecoin, Neteller, Tron, Криптовалюта, SberPay, Piastrix, VouWallet, Binance Pay, T-Pay, Alfa Pay, Bybit Pay, VTB Pay" },
+                            { label: "Способы вывода:", value: "Мир, СБП, Visa, Mastercard, Tether, Bitcoin, Ethereum, Litecoin, Tron, Piastrix, Криптовалюта, VouWallet" },
+                            { label: "Скорость выплат:", value: "0-24 часов" }
+                            ]            
             },
             {
                 id: "03",
@@ -936,7 +945,16 @@
                 bonusText: "500% на депозит",
                 bonusExtra: "+ 250 FS",
                 link: "https://lkmb.cc/b3ffc504",
-                terms: "1Win объединяет казино и ставки на спорт в одном аккаунте: слоты, live-игры, crash-развлечения, настольные игры на деньги и спортивные события находятся в одном месте. Подойдёт игрокам, которые не хотят выбирать между букмекерским разделом и казино. Также в 1Вин доступно более десятка эксклюзивных игр и один из самых быстрых выводов для россиян."
+                terms: [
+                            { label: "Мин. депозит:", value: "1000 RUB" },
+                            { label: "Мин. сумма вывода:", value: "2000 RUB" },
+                            { label: "Валюта счета:", value: "RUB, USD, EUR, BTC, ETH, ILS, VES, crypto, KHR, XLM, SLE, PAB, HNL, GTQ, CUP, CRC, XMR, ZMW, XOF, XAF, VND, UYU, UGX, TZS, TRX, TND, TJS, SZL, SOS, RWF, QAR, PYG, PKR, PHP, OMR, NPR, NGN, NAD, MZN, MYR, MWK, MUR, MNT, MMK, MGA, MAD, LKR, KWD, KRW, KES, JOD, IRR, IQD, IDR, GNF, GMD, GHS, ETB, EGP, DZD, DJF, CDF, BWP, BOB, BIF, BDT, AOA, CLP, PEN, HKD, SGD, AMD, UZS, AZN, MDL, DASH, COP, KGS, BYN, THB, USDT, DOGE, INR, ARS, KZT, ZAR, CZK, UAH, NZD, MXN, GEL, BRL, TRY, PLN, LTC, XRP, JPY, CAD, AUD, SEK" },
+                            { label: "Лимит на вывод средств:", value: "Без ограничений" },
+                            { label: "Ограничение за транзакцию:", value: "Без ограничений" },
+                            { label: "Способы пополнения:", value: "СБП, Tether, Bitcoin, Ethereum, Binance Coin, Litecoin, Tron, Банк ВТБ, Сбербанк, Piastrix, Альфа-Банк, Т-Банк" },
+                            { label: "Способы вывода:", value: "СБП, Tether, Bitcoin, Ethereum, Binance Coin, Litecoin, Tron, Банк ВТБ, Сбербанк, Piastrix, Альфа-Банк, Т-Банк" },
+                            { label: "Скорость выплат:", value: "0-48 часов" }
+                            ]            
             }
         ];
 
@@ -963,7 +981,7 @@
                     <div style="display: contents;">
                         <div class="project-action">
                             <a href="${project.link}" target="_blank" class="btn-go">Перейти &gt;</a>
-                            <span class="terms-link" onclick="openTerms(${index})">Подробнее о проекте</span>
+                            <span class="terms-link" onclick="openTerms(${index})">Финансовая информация</span>
                         </div>
                     </div>
                 `;
@@ -983,7 +1001,7 @@
 
         function openTerms(index) {
             const project = projectsData[index];
-            modalTitle.innerText = `Подробнее о проекте ${project.name}`;
+            modalTitle.innerText = `Финансовая информация для ${project.name}`;
             modalText.innerText = project.terms;
             modalOverlay.classList.add('active');
         }
